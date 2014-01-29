@@ -17,6 +17,6 @@
         android:layout_marginLeft="35dp"
         android:layout_marginTop="29dp"
         android:onClick="switchToLogin"
-        android:text="Login" />
+        android:text="@string/login" />
 
 </RelativeLayout>
