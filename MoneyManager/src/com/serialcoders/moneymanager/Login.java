@@ -8,8 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Login extends Activity {
-	EditText username;
-	EditText password;
+	EditText username = null;
+	EditText password = null;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
