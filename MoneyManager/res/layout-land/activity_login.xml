@@ -12,38 +12,36 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/username"
         android:layout_alignLeft="@+id/username"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="101dp"
+        android:layout_marginBottom="35dp"
         android:text="@string/username" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
 
     <TextView
         android:id="@+id/TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/password"
-        android:layout_alignRight="@+id/textView1"
+        android:layout_alignLeft="@+id/username"
         android:text="@string/password" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:ems="10"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_marginBottom="19dp"
+        android:layout_alignLeft="@+id/TextView2"
+        android:layout_alignRight="@+id/username"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:inputType="textPassword" />
 
@@ -51,8 +49,9 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="18dp"
         android:onClick="login"
         android:text="@string/login" />
 
