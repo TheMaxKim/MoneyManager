@@ -20,7 +20,10 @@ public class Startup extends Activity {
 		getMenuInflater().inflate(R.menu.startup, menu);
 		return true;
 	}
-	
+	public void switchToRegister(View view) {
+		Intent intent = new Intent(getApplicationContext(), RegisterUser.class);
+		startActivity(intent);
+	}
 	public void switchToLogin(View view) {
 		Intent intent = new Intent(getApplicationContext(), Login.class);
 	    startActivity(intent);

@@ -26,6 +26,7 @@
         android:layout_alignRight="@+id/button_login"
         android:layout_below="@+id/button_login"
         android:layout_marginTop="74dp"
-        android:text="Register" />
+        android:onClick="switchToRegister"
+        android:text="@string/register" />
 
 </RelativeLayout>

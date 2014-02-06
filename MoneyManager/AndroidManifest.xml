@@ -36,6 +36,10 @@
             android:name="com.serialcoders.moneymanager.LoginSuccess"
             android:label="@string/title_activity_login_success" >
         </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.RegisterUser"
+            android:label="@string/title_activity_register_user" >
+        </activity>
     </application>
 
 </manifest>
