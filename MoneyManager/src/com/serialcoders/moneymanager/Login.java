@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.Intent;
 
 public class Login extends Activity {
 	EditText username = null;
@@ -32,6 +33,8 @@ public class Login extends Activity {
     		password.getText().toString().equals("pass123")) {
     	    	Toast.makeText(getApplicationContext(), "Success!", 
     	    	      Toast.LENGTH_SHORT).show();
+    			Intent intent = new Intent(getApplicationContext(), LoginSuccess.class);
+    		    startActivity(intent);
     	} else {
     	      Toast.makeText(getApplicationContext(), "Incorrect Login Credentials", 
     	    	      Toast.LENGTH_SHORT).show();

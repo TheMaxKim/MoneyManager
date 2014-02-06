@@ -10,4 +10,6 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="title_activity_login_success">LoginSuccess</string>
+	<string name="login_success_message">You are logged in!</string>
 </resources>
