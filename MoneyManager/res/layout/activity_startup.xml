@@ -16,6 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="94dp"
         android:onClick="switchToLogin"
+        android:background="@drawable/sample"
         android:text="@string/login" />
 
     <Button
@@ -27,6 +28,7 @@
         android:layout_below="@+id/button_login"
         android:layout_marginTop="74dp"
         android:onClick="switchToRegister"
+        android:background="@drawable/sample"
         android:text="@string/register" />
 
 </RelativeLayout>

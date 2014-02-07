@@ -27,6 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="login"
+        android:background="@drawable/sample"
         android:text="@string/login" />
 
     <TextView
