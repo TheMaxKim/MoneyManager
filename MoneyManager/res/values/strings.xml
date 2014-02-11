@@ -13,5 +13,7 @@
     <string name="title_activity_login_success">LoginSuccess</string>
     <string name="login_success_message">You are logged in!</string>
     <string name="title_activity_register_user">RegisterUser</string>
+    <string name="new_user_registration">New User Registration</string>
+    <string name="confirm_password">Confirm Password</string>
 
 </resources>
