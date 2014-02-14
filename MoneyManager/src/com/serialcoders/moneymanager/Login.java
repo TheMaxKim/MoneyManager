@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+
 public class Login extends Activity {
 	EditText username = null;
 	EditText password = null;
@@ -15,7 +18,10 @@ public class Login extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         setContentView(R.layout.activity_login);
+        
     }
 
 
