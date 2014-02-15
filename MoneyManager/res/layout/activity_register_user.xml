@@ -9,7 +9,7 @@
     tools:context=".RegisterUser" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/registerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
@@ -40,17 +40,17 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_alignLeft="@+id/registerName"
+        android:layout_below="@+id/registerName"
         android:layout_marginTop="14dp"
         android:text="@string/password" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/registerPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView3"
-        android:layout_alignRight="@+id/editText1"
+        android:layout_alignRight="@+id/registerName"
         android:layout_below="@+id/textView3"
         android:ems="10"
         android:inputType="textPassword" >
@@ -62,25 +62,25 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignLeft="@+id/registerPassword"
         android:layout_centerVertical="true"
         android:text="@string/confirm_password" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/confirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView4"
-        android:layout_alignRight="@+id/editText2"
+        android:layout_alignRight="@+id/registerPassword"
         android:layout_below="@+id/textView4"
         android:ems="10"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/confirmPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:text="@string/register" />

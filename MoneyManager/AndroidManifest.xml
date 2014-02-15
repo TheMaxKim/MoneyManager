@@ -28,10 +28,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.serialcoders.moneymanager.Startup"
-            android:label="@string/title_activity_startup" >
-        </activity>
-        <activity
             android:name="com.serialcoders.moneymanager.Login"
             android:label="@string/title_activity_login" >
         </activity>
@@ -42,6 +38,10 @@
         <activity
             android:name="com.serialcoders.moneymanager.RegisterUser"
             android:label="@string/title_activity_register_user" >
+        </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.UserAccountActivity"
+            android:label="@string/title_activity_user_account" >
         </activity>
     </application>
 

@@ -14,6 +14,15 @@
     <string name="login_success_message">You are logged in!</string>
     <string name="title_activity_register_user">RegisterUser</string>
     <string name="new_user_registration">New User Registration</string>
-    <string name="confirm_password">Confirm Password</string>
+    <string name="logout">Log out</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="title_activity_user_account">User Account Page</string>
+    <string name="error_intro">Registration failed: </string>
+    <string name="error_blank_username">Please enter a username</string>
+    <string name="error_blank_password">Please enter a password.</string> 
+    <string name="error_join"> and </string>
+    <string name="error_end"> Thanks!</string>
+    <string name="error_password_mismatch">Password does not match</string>
+   
 
 </resources>
