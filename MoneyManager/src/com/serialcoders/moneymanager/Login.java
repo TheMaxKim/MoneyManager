@@ -59,7 +59,12 @@ public class Login extends Activity {
                         if (user != null) {
                             // The user is logged in.
                             Toast.makeText(Login.this, "Successfully Logged in!", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(Login.this, UserAccountActivity.class);
+                            Intent i;
+                            if (ParseUser.getCurrentUser().getUsername().equals("admin")) {
+                            	i = new Intent(Login.this, AdminAccountActivity.class);
+                            } else {
+                            	i = new Intent(Login.this, UserAccountActivity.class);
+                            }
                             startActivity(i);
                         } else {
                             Toast.makeText(Login.this, "Failed to login "+e.toString(), Toast.LENGTH_LONG).show();

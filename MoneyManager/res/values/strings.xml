@@ -19,10 +19,11 @@
     <string name="title_activity_user_account">User Account Page</string>
     <string name="error_intro">Registration failed: </string>
     <string name="error_blank_username">Please enter a username</string>
-    <string name="error_blank_password">Please enter a password.</string> 
+    <string name="error_blank_password">Please enter a password.</string>
     <string name="error_join"> and </string>
     <string name="error_end"> Thanks!</string>
     <string name="error_password_mismatch">Password does not match</string>
-   
+    <string name="title_activity_admin_account">AdminAccountActivity</string>
+    <string name="admin_account_message">Welcome to the Admin\'s account. You can reset user passwords here.</string>
 
 </resources>
