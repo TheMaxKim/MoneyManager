@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/logout" />
-
     <TextView
         android:id="@+id/welcomemessage"
         android:layout_width="wrap_content"
@@ -20,14 +12,38 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp"
         android:text="TextView" />
+    
+    <LinearLayout
+        android:id="@+id/account_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcomemessage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:orientation="vertical" >
+        
+        
+        
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_add_account"
+        android:layout_gravity="bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_logout"
+        android:layout_above="@+id/button_logout"
         android:layout_centerHorizontal="true"
-        android:text="@string/add_account"
-        android:onClick="addAccount" />
+        android:onClick="addAccount"
+        android:text="@string/add_account" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_add_account"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/button_add_account"
+        android:layout_marginBottom="18dp"
+        android:text="@string/logout" />
 
 </RelativeLayout>

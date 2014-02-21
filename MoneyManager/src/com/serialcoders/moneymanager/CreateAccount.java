@@ -8,6 +8,7 @@ import com.parse.ParseUser;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -44,6 +45,9 @@ public class CreateAccount extends Activity {
 		
 		user.add("Accounts", account);
 		Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_LONG).show();
+		
+		Intent i = new Intent(CreateAccount.this, UserAccountActivity.class);
+		startActivity(i);
 	}
 
 }

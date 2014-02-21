@@ -1,5 +1,8 @@
 package com.serialcoders.moneymanager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,12 +13,15 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -39,6 +45,24 @@ public class UserAccountActivity extends Activity {
 	    TextView textView = (TextView) findViewById(R.id.welcomemessage);
 	    String username = user.getUsername();
 	    textView.setText("Welcome to MoneyManager " + username + "!");
+	    
+	    List<ParseObject> accountList;
+	    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+	    query.whereEqualTo("username", user.getUsername());
+	    try {
+	    	accountList = query.find();
+	    } catch (ParseException e) {
+	    	accountList = new ArrayList<ParseObject>();
+	    	Toast.makeText(UserAccountActivity.this, "Cannot load Accounts: " + e, Toast.LENGTH_LONG).show();
+	    }
+	    
+	    for (ParseObject a : accountList) {
+	    	textView = new TextView(UserAccountActivity.this);
+	    	textView.setText(a.getString("fullName"));
+	    	LinearLayout ll = (LinearLayout) findViewById(R.id.account_list);
+	    	
+	    	ll.addView(textView);
+	    }
 	    
 	    findViewById(R.id.button_logout).setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
