@@ -25,5 +25,10 @@
     <string name="error_password_mismatch">Password does not match</string>
     <string name="title_activity_admin_account">AdminAccountActivity</string>
     <string name="admin_account_message">Welcome to the Admin\'s account. You can reset user passwords here.</string>
+    <string name="create_account">Create Account</string>
+    <string name="title_activity_create_account">CreateAccount</string>
+    <string name="full_name">Full Name</string>
+    <string name="display_name">Display Name</string>
+    <string name="add_account">Create New Account</string>
 
 </resources>

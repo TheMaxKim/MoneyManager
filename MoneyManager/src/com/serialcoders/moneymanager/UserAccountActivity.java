@@ -53,4 +53,9 @@ public class UserAccountActivity extends Activity {
         	}
         });
 	}
+	
+	public void addAccount(View v) {
+		Intent i = new Intent(UserAccountActivity.this, CreateAccount.class);
+		startActivity(i);
+	}
 }

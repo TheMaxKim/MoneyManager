@@ -1,5 +1,7 @@
 package com.serialcoders.moneymanager;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -90,6 +92,7 @@ public class RegisterUser extends Activity {
                 user.setUsername(username);
                 password = passwordView.getText().toString();
                 user.setPassword(password);
+                user.saveInBackground();
                 
                 // Call the Parse signup method
                 user.signUpInBackground(new SignUpCallback() {
