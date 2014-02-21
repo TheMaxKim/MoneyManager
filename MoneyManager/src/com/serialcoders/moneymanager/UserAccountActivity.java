@@ -58,7 +58,7 @@ public class UserAccountActivity extends Activity {
 	    
 	    for (ParseObject a : accountList) {
 	    	textView = new TextView(UserAccountActivity.this);
-	    	textView.setText(a.getString("fullName"));
+	    	textView.setText(a.getString("displayName"));
 	    	LinearLayout ll = (LinearLayout) findViewById(R.id.account_list);
 	    	
 	    	ll.addView(textView);
