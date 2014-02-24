@@ -54,7 +54,7 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
-        android:background="@drawable/sample"
+        android:background="@drawable/green_button"
         android:onClick="login"
         android:text="@string/login" />
 
@@ -75,7 +75,7 @@
         android:layout_below="@+id/button_logIn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/sample"
+        android:background="@drawable/green_button"
         android:onClick="login"
         android:text="@string/register" />
 

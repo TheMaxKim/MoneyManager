@@ -38,6 +38,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/create_account"
+        android:background="@drawable/green_button"
         android:onClick="createAccount" />
 
 </RelativeLayout>
