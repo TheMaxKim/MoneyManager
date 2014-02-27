@@ -81,7 +81,6 @@ public class CreateAccount extends Activity {
 	        	  public void onClick(DialogInterface dialog, int which) {
 	    	        	createAccount(fullName, displayName, user);
 	    	    	    dialog.dismiss();
-	    	        	
 	        	  }
 	        	});
 	        	builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

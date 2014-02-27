@@ -27,7 +27,7 @@
     <string name="admin_account_message">Welcome to the Admin\'s account. You can reset user passwords here.</string>
     <string name="create_account">Create Account</string>
     <string name="title_activity_create_account">CreateAccount</string>
-    <string name="full_name">Full Name</string>
+    <string name="full_name">Full Account Name</string>
     <string name="display_name">Display Name</string>
     <string name="add_account">Create\nNew Account</string>
     <string name="title_activity_financial_account">FinancialAccount</string>
@@ -36,5 +36,5 @@
     <string name="title_section3">Section 3</string>
     <string name="remove_account">Remove\nAccount</string>
     <string name="financial_account_page">This is one of your accounts!</string>
-
+	<string name="account_creation">Financial Account Creation</string>
 </resources>

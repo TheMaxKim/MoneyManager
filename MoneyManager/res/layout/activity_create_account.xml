@@ -9,36 +9,62 @@
     tools:context=".CreateAccount" >
 
     <EditText
+        android:id="@+id/display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/display_name" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/display_name"
+        android:layout_below="@+id/full_name"
+        android:text="@string/display_name" />
+
+    <EditText
         android:id="@+id/full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:hint="@string/full_name" />
+
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/full_name" >
+        android:text="@string/account_creation"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/display_name"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/full_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/display_name" />
+        android:layout_alignLeft="@+id/full_name"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="33dp"
+        android:text="@string/full_name" />
 
     <Button
         android:id="@+id/create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/display_name"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/create_account"
+        android:layout_marginTop="30dp"
         android:background="@drawable/green_button"
-        android:onClick="checkAccount" />
+        android:onClick="checkAccount"
+        android:text="@string/create_account" />
 
 </RelativeLayout>
