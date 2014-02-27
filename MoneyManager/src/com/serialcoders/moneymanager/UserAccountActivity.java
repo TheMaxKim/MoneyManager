@@ -68,6 +68,7 @@ public class UserAccountActivity extends Activity {
 	    	ll.addView(textView);*/
 	    	Button accountButton = new Button(UserAccountActivity.this);
 	    	accountButton.setText(a.getString("displayName"));
+	    	accountButton.setBackgroundResource(R.drawable.green_button);
 	    	LinearLayout ll = (LinearLayout)findViewById(R.id.account_list);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);
