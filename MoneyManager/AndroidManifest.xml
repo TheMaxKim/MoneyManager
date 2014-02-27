@@ -51,6 +51,10 @@
             android:name="com.serialcoders.moneymanager.CreateAccount"
             android:label="@string/title_activity_create_account" >
         </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.FinancialAccount"
+            android:label="@string/title_activity_financial_account" >
+        </activity>
     </application>
 
 </manifest>

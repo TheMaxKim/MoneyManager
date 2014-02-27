@@ -29,6 +29,12 @@
     <string name="title_activity_create_account">CreateAccount</string>
     <string name="full_name">Full Name</string>
     <string name="display_name">Display Name</string>
-    <string name="add_account">Create New Account</string>
+    <string name="add_account">Create\nNew Account</string>
+    <string name="title_activity_financial_account">FinancialAccount</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="remove_account">Remove\nAccount</string>
+    <string name="financial_account_page">This is one of your accounts!</string>
 
 </resources>
