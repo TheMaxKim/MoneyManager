@@ -11,6 +11,8 @@ import com.parse.ParseUser;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -18,8 +20,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CreateAccount extends Activity {
-
-	@Override
+    String fullName;
+    String displayName;
+    
+    ParseUser user;	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_account);
@@ -34,13 +38,13 @@ public class CreateAccount extends Activity {
 		return true;
 	}
 	
-	public void createAccount(View v) {
+	public void checkAccount(View v) {
 		EditText fullNameView = (EditText) findViewById(R.id.full_name);
         EditText displayNameView = (EditText) findViewById(R.id.display_name);
-        String fullName = fullNameView.getText().toString();
-        String displayName = displayNameView.getText().toString();
+        fullName = fullNameView.getText().toString();
+        displayName = displayNameView.getText().toString();
         
-        ParseUser user = ParseUser.getCurrentUser();
+        user = ParseUser.getCurrentUser();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
         List<ParseObject> accountList;
         
@@ -69,20 +73,44 @@ public class CreateAccount extends Activity {
 	            }
 	        
 	        if (!accountExists) {
-				ParseObject account = new ParseObject("Account");
-				account.put("fullName", fullName);
-				account.put("displayName", displayName);
-				account.put("username", user.get("username"));
-				account.saveInBackground();
-			
-			
-				user.add("Accounts", account);
-				Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_LONG).show();
-				
-				Intent i = new Intent(CreateAccount.this, UserAccountActivity.class);
-				startActivity(i);
+	    		AlertDialog.Builder builder = new AlertDialog.Builder(CreateAccount.this);
+	        	builder.setCancelable(true);
+	        	builder.setTitle("Create an account with this information?");
+	        	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+	        	  @Override
+	        	  public void onClick(DialogInterface dialog, int which) {
+	    	        	createAccount(fullName, displayName, user);
+	    	    	    dialog.dismiss();
+	    	        	
+	        	  }
+	        	});
+	        	builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	        	  @Override
+	        	  public void onClick(DialogInterface dialog, int which) {
+	        	    dialog.dismiss();
+	        	  }
+	        	});
+	        	AlertDialog alert = builder.create();
+	        	alert.show();
+	    	
 	    	}
         }
 	}
 
+	public void createAccount(String fullName, String displayName, ParseUser user) {
+
+		ParseObject account = new ParseObject("Account");
+		account.put("fullName", fullName);
+		account.put("displayName", displayName);
+		account.put("username", user.get("username"));
+		account.saveInBackground();
+	
+	
+		user.add("Accounts", account);
+		Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_LONG).show();
+		
+		Intent i = new Intent(CreateAccount.this, UserAccountActivity.class);
+		startActivity(i);
+	}
+	
 }

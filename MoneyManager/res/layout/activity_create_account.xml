@@ -39,6 +39,6 @@
         android:layout_centerVertical="true"
         android:text="@string/create_account"
         android:background="@drawable/green_button"
-        android:onClick="createAccount" />
+        android:onClick="checkAccount" />
 
 </RelativeLayout>
