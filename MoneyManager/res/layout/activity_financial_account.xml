@@ -9,8 +9,61 @@
     tools:context=".FinancialAccount" >
 
     <TextView
+        android:id="@+id/fin_account_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/financial_account_page" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/financial_account_page"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button_deposit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawablePadding="2dip"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:onClick="makeDeposit"
+            android:text="@string/deposit" />
+
+        <Button
+            android:id="@+id/button_withdraw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawablePadding="2dip"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:onClick="makeWithdrawal"
+            android:text="@string/withdraw" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/view1"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>

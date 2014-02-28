@@ -36,5 +36,14 @@
     <string name="title_section3">Section 3</string>
     <string name="remove_account">Remove\nAccount</string>
     <string name="financial_account_page">This is one of your accounts!</string>
-	<string name="account_creation">Financial Account Creation</string>
+    <string name="account_creation">Financial Account Creation</string>
+    <string name="deposit">Make\nDeposit</string>
+    <string name="withdraw">Make\nWithdrawal</string>
+    <string name="title_activity_deposit">DepositActivity</string>
+    <string name="title_activity_withdraw">WithdrawActivity</string>
+	<string name="amount">Amount</string>
+	<string name="withdraw_destination">Withdraw To</string>
+	<string name="deposit_source">Deposit From</string>
+	<string name="destination">Destination</string>
+	<string name="source">Source</string>
 </resources>

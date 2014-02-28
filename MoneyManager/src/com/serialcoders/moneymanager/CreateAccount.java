@@ -23,7 +23,8 @@ public class CreateAccount extends Activity {
     String fullName;
     String displayName;
     
-    ParseUser user;	@Override
+    ParseUser user;
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_account);

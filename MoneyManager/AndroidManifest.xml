@@ -55,6 +55,14 @@
             android:name="com.serialcoders.moneymanager.FinancialAccount"
             android:label="@string/title_activity_financial_account" >
         </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.DepositActivity"
+            android:label="@string/title_activity_deposit" >
+        </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.WithdrawActivity"
+            android:label="@string/title_activity_withdraw" >
+        </activity>
     </application>
 
 </manifest>
