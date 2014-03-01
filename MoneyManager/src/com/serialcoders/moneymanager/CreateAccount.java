@@ -82,6 +82,8 @@ public class CreateAccount extends Activity {
 	        	  public void onClick(DialogInterface dialog, int which) {
 	    	        	createAccount(fullName, displayName, user);
 	    	    	    dialog.dismiss();
+	    	    		Intent i = new Intent(CreateAccount.this, UserAccountActivity.class);
+	    	    		startActivity(i);
 	        	  }
 	        	});
 	        	builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -109,8 +111,7 @@ public class CreateAccount extends Activity {
 		user.add("Accounts", account);
 		Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_LONG).show();
 		
-		Intent i = new Intent(CreateAccount.this, UserAccountActivity.class);
-		startActivity(i);
+
 	}
 	
 }

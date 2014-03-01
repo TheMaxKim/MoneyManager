@@ -77,7 +77,7 @@ public class UserAccountActivity extends Activity {
             	public void onClick(View view) {
             		Button pressedButton = (Button) view;
             		String passedAccount = pressedButton.getText().toString();
-            		Intent in = new Intent(UserAccountActivity.this, FinancialAccount.class);
+            		Intent in = new Intent(UserAccountActivity.this, FinancialAccountActivity.class);
             		in.putExtra("FinancialAccountName", passedAccount);
             		startActivity(in);
             	}

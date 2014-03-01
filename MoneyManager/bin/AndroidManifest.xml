@@ -32,10 +32,6 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="com.serialcoders.moneymanager.LoginSuccess"
-            android:label="@string/title_activity_login_success" >
-        </activity>
-        <activity
             android:name="com.serialcoders.moneymanager.RegisterUser"
             android:label="@string/title_activity_register_user" >
         </activity>
@@ -52,16 +48,12 @@
             android:label="@string/title_activity_create_account" >
         </activity>
         <activity
-            android:name="com.serialcoders.moneymanager.FinancialAccount"
+            android:name="com.serialcoders.moneymanager.FinancialAccountActivity"
             android:label="@string/title_activity_financial_account" >
         </activity>
         <activity
-            android:name="com.serialcoders.moneymanager.DepositActivity"
-            android:label="@string/title_activity_deposit" >
-        </activity>
-        <activity
-            android:name="com.serialcoders.moneymanager.WithdrawActivity"
-            android:label="@string/title_activity_withdraw" >
+            android:name="com.serialcoders.moneymanager.TransactionActivity"
+            android:label="@string/title_activity_transaction" >
         </activity>
     </application>
 
