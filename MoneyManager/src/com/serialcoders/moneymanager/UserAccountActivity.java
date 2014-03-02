@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,7 +26,7 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.Parse;
@@ -34,7 +37,8 @@ import com.parse.SaveCallback;
 public class UserAccountActivity extends Activity {
 	
 	private ParseUser user;
-	
+	private ParseFile profilePhotoFile;
+	private ImageView profilePictureView;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -59,6 +63,32 @@ public class UserAccountActivity extends Activity {
 	    	accountList = new ArrayList<ParseObject>();
 	    	Toast.makeText(UserAccountActivity.this, "Cannot load Accounts: " + e, Toast.LENGTH_LONG).show();
 	    }
+	    
+	    this.profilePictureView = (ImageView)this.findViewById(R.id.profilepicture);
+	    profilePhotoFile = user.getParseFile("profilePhoto");
+	    if (profilePhotoFile != null){
+	    	
+	    	byte[] data;
+			try {
+				data = profilePhotoFile.getData();
+				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+		    	profilePictureView.setImageBitmap(bitmap);
+			} catch (ParseException e) {
+				Toast.makeText(UserAccountActivity.this, "Cannot Show Profile Picture: " + e, Toast.LENGTH_LONG).show();
+			}
+	    	
+	    }
+	    
+	   
+        findViewById(R.id.changepicture).setOnClickListener(new View.OnClickListener() {		
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(UserAccountActivity.this, AddProfilePictureActivity.class);
+				startActivity(i);	
+			}
+		});
+	    
+	    
 	    
 	    for (ParseObject a : accountList) {
 	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.

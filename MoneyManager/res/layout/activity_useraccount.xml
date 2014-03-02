@@ -17,10 +17,11 @@
         android:id="@+id/account_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/welcomemessage"
+        android:layout_below="@+id/changepicture"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
         android:orientation="vertical" >
+
     </LinearLayout>
 
     <Button
@@ -84,5 +85,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/button_logout"
         android:background="@android:color/darker_gray" />
+
+    <ImageView
+        android:id="@+id/profilepicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcomemessage"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/default_profile_pic" />
+
+    <Button
+        android:id="@+id/changepicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profilepicture"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/green_button"
+        android:text="@string/change_profile_picture"
+        android:textSize="10sp" />
 
 </RelativeLayout>

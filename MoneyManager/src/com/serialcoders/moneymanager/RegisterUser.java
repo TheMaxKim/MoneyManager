@@ -106,7 +106,7 @@ public class RegisterUser extends Activity {
                         } else {
                         	login(username, password);
                         	
-							Intent i = new Intent(RegisterUser.this, UserAccountActivity.class);
+							Intent i = new Intent(RegisterUser.this, AddProfilePictureActivity.class);
 							startActivity(i);
                         	
                         

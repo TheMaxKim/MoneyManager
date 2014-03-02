@@ -47,5 +47,10 @@
     <string name="title_activity_transaction">TransactionActivity</string>
     <string name="balance">Balance: </string>
     <string name="make_transaction">Make\nTransaction</string>
+    <string name="accept_picture">Continue</string>
+    <string name="choose_picture">Choose a picture</string>
+    <string name="take_picture">Take a picture</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="change_profile_picture">Change profile picture</string>
 
 </resources>
