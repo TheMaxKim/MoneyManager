@@ -56,15 +56,33 @@
         android:layout_marginTop="33dp"
         android:text="@string/full_name" />
 
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/display_name"
+        android:layout_below="@+id/display_name"
+        android:text="@string/init_balance" />
+
     <Button
         android:id="@+id/create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/display_name"
+        android:layout_below="@+id/TextView01"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:background="@drawable/green_button"
         android:onClick="checkAccount"
         android:text="@string/create_account" />
+
+    <EditText
+        android:id="@+id/init_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView01"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/init_balance" 
+        android:inputType="numberDecimal" />
 
 </RelativeLayout>

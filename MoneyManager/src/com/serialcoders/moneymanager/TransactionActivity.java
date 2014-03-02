@@ -20,6 +20,7 @@ public class TransactionActivity extends Activity {
 	Double amount;
 	String target;
 	String passedName;
+	String transactionType; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,10 @@ public class TransactionActivity extends Activity {
         
         if (rbw.isChecked()) {
         	amount = -amount;
+        	transactionType = "Withdrawal";
+        }
+        else{
+        	transactionType = "Deposit";
         }
         
         ParseUser user = ParseUser.getCurrentUser();
@@ -96,6 +101,7 @@ public class TransactionActivity extends Activity {
 		transaction.put("amount", amount);
 		transaction.put("target", target);
 		transaction.put("userName", user);
+		transaction.put("transactionType", transactionType);
 		transaction.saveInBackground();
 	
 		Toast.makeText(TransactionActivity.this, "Transaction made!", Toast.LENGTH_LONG).show();

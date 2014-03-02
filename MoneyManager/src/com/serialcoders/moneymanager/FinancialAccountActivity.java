@@ -1,6 +1,9 @@
 package com.serialcoders.moneymanager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.parse.Parse;
@@ -24,6 +27,8 @@ import android.widget.Toast;
 public class FinancialAccountActivity extends Activity {
 
 	String passedName;
+	ParseObject currentFinancialAccount;
+	String accountInitialBalance;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +43,31 @@ public class FinancialAccountActivity extends Activity {
 		
 		TextView textView = (TextView) findViewById(R.id.fin_account_welcome);
 		textView.setText(passedName);
-
+		
+		ParseUser user = ParseUser.getCurrentUser();
+		
+		//To get the initial balance in the account
+		ParseQuery<ParseObject> accountQuery = ParseQuery.getQuery("Account");
+	    List<ParseObject> accountList;
+	    accountQuery.whereEqualTo("username", user.getUsername());
+	    accountQuery.whereEqualTo("displayName", passedName);
+	    try {
+	    	accountList = accountQuery.find();
+	    } catch (ParseException e) {
+	    	accountList = new ArrayList<ParseObject>();
+	    	Toast.makeText(this, "Cannot load account information: " + e, Toast.LENGTH_LONG).show();
+	    }
+	    for (ParseObject account : accountList) {
+	    	accountInitialBalance = (String) account.get("initialBalance");
+	    }
+	    
+	    
+	    
+		
+		
 		
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
 	    List<ParseObject> transactionList;
-        
-	    ParseUser user = ParseUser.getCurrentUser();
         query.whereEqualTo("accountFullName", passedName);
         query.whereEqualTo("userName", user);
 	    try {
@@ -52,9 +76,12 @@ public class FinancialAccountActivity extends Activity {
 	    	transactionList = new ArrayList<ParseObject>();
 	    	Toast.makeText(this, "Cannot load transactions: " + e, Toast.LENGTH_LONG).show();
 	    }
-	    
 	    Double totalBalance = 0.0;
+	    if(accountInitialBalance != null){
+	    	totalBalance = Double.parseDouble(accountInitialBalance);
+	    }
 	    
+	    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	    for (ParseObject a : transactionList) {
 	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.
 	    	textView.setText(a.getString("displayName"));
@@ -62,7 +89,8 @@ public class FinancialAccountActivity extends Activity {
 	    	
 	    	ll.addView(textView);*/
 	    	Button accountButton = new Button(this);
-	    	accountButton.setText(Double.toString(a.getDouble("amount")));
+	    	Date transactionDate = a.getCreatedAt();    	
+	    	accountButton.setText(a.get("transactionType") + "   " + Double.toString(a.getDouble("amount")) + " on " + df.format(transactionDate));
 	    	accountButton.setBackgroundResource(R.drawable.green_button);
 	    	LinearLayout ll = (LinearLayout)findViewById(R.id.transaction_list);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);

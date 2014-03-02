@@ -52,5 +52,6 @@
     <string name="take_picture">Take a picture</string>
     <string name="profile_picture">Profile picture</string>
     <string name="change_profile_picture">Change profile picture</string>
+    <string name="init_balance">Initial balance</string>
 
 </resources>

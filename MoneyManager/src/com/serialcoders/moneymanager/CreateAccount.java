@@ -22,6 +22,7 @@ import android.widget.Toast;
 public class CreateAccount extends Activity {
     String fullName;
     String displayName;
+    String initialBalance;
     
     ParseUser user;
     @Override
@@ -42,8 +43,10 @@ public class CreateAccount extends Activity {
 	public void checkAccount(View v) {
 		EditText fullNameView = (EditText) findViewById(R.id.full_name);
         EditText displayNameView = (EditText) findViewById(R.id.display_name);
+        EditText initialBalanceView = (EditText)findViewById(R.id.init_balance);
         fullName = fullNameView.getText().toString();
         displayName = displayNameView.getText().toString();
+        initialBalance = initialBalanceView.getText().toString();
         
         user = ParseUser.getCurrentUser();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
@@ -104,7 +107,9 @@ public class CreateAccount extends Activity {
 		ParseObject account = new ParseObject("Account");
 		account.put("fullName", fullName);
 		account.put("displayName", displayName);
+		account.put("initialBalance", initialBalance);
 		account.put("username", user.get("username"));
+	
 		account.saveInBackground();
 	
 	
