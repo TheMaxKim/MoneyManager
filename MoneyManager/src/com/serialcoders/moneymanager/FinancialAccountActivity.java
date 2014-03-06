@@ -123,4 +123,9 @@ public class FinancialAccountActivity extends Activity {
         startActivity(in);
 	}
 	
+	public void backToAccounts(View v) {
+		Intent in = new Intent(FinancialAccountActivity.this, UserAccountActivity.class);
+		startActivity(in);
+	}
+	
 }
