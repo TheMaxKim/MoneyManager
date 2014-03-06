@@ -54,5 +54,7 @@
     <string name="change_profile_picture">Change profile picture</string>
     <string name="init_balance">Initial balance</string>
     <string name="back_to_accounts">Back</string>
+    <string name="title_activity_spending_report">SpendingReportActivity</string>
+    <string name="view_report">View Spending Report</string>
 
 </resources>

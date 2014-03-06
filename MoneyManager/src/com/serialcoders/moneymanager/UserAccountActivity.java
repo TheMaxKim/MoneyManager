@@ -139,4 +139,9 @@ public class UserAccountActivity extends Activity {
 		//TODO Add remove account functionality for button
 	}
 	
+	public void viewReport(View v) {
+		Intent in = new Intent(UserAccountActivity.this, SpendingReportActivity.class);
+		startActivity(in);
+	}
+	
 }
