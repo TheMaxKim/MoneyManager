@@ -7,12 +7,42 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SpendingReportActivity" >
+    
+	<LinearLayout
+	    android:id="@+id/date_range"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+	    
+	    <EditText
+	        android:id="@+id/date_from"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:hint="from"
+	        android:focusable="false"
+	        android:inputType="date" >
 
+	    </EditText>
+	
+	    <EditText
+	        android:id="@+id/date_to"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:hint="to"
+	        android:focusable="false"
+	        android:inputType="date" />
+	    
+    </LinearLayout>
+    
     <TextView
         android:id="@+id/total_withdrawals"
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
+        android:layout_below="@id/date_range"
         android:text="total" />
 
     <LinearLayout
@@ -24,5 +54,6 @@
         android:orientation="vertical" >
 
     </LinearLayout>
+
 
 </RelativeLayout>
