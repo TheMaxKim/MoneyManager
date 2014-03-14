@@ -19,16 +19,13 @@ import android.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
@@ -49,6 +46,10 @@ public class SpendingReportActivity extends Activity {
 		dateTo = new Date();
 		dateFrom = new Date(0);
 		
+		setUpListeners();
+	}
+	
+	private void setUpListeners() {
 		EditText dateFromText = (EditText) findViewById(R.id.date_from);
 		dateFromText.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -76,17 +77,11 @@ public class SpendingReportActivity extends Activity {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				
-				
-			}
+					int after) { }
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				
-			}
+					int count) { }
 			
 		});
 		
@@ -117,17 +112,11 @@ public class SpendingReportActivity extends Activity {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				
-				
-			}
+					int after) { }
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				
-				
-			}
+					int count) { }
 			
 		});
 	}
@@ -141,8 +130,8 @@ public class SpendingReportActivity extends Activity {
         query.whereLessThan("amount", 0); //only get negative amounts
         Log.d("tag3", dateFrom.toString());
         Log.d("tag3", dateTo.toString());
-        query.whereGreaterThan("createdAt", dateFrom);
-        query.whereLessThan("createdAt", dateTo);
+        query.whereGreaterThanOrEqualTo("createdAt", dateFrom);
+        query.whereLessThanOrEqualTo("createdAt", dateTo);
 	    try {
 	    	transactionList = query.find();
 	    } catch (ParseException e) {
@@ -156,8 +145,8 @@ public class SpendingReportActivity extends Activity {
     	ll.removeAllViews();
 	    for (ParseObject o : transactionList) {
 	    	Button accountButton = new Button(this);
-	    	Date transactionDate = o.getCreatedAt();    	
-	    	accountButton.setText(o.get("transactionType") + "   " + Double.toString(o.getDouble("amount")) + " on " + df.format(transactionDate));
+	    	Date transactionDate = o.getCreatedAt();
+	    	accountButton.setText(o.get("transactionType") + "   " + Double.toString(o.getDouble("amount")) + " from " + o.get("accountFullName") + "\n on " + df.format(transactionDate));
 	    	accountButton.setBackgroundResource(R.drawable.green_button);
 	    	
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);

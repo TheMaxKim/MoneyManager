@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -41,11 +41,19 @@
         </activity>
         <activity
             android:name="com.serialcoders.moneymanager.UserAccountActivity"
-            android:label="@string/title_activity_user_account" >
+            android:label="@string/title_activity_user_account"
+            android:parentActivityName="com.serialcoders.moneymanager.Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.serialcoders.moneymanager.Login" />
         </activity>
         <activity
             android:name="com.serialcoders.moneymanager.AdminAccountActivity"
-            android:label="@string/title_activity_admin_account" >
+            android:label="@string/title_activity_admin_account"
+            android:parentActivityName="com.serialcoders.moneymanager.Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.serialcoders.moneymanager.Login" />
         </activity>
         <activity
             android:name="com.serialcoders.moneymanager.CreateAccount"
@@ -53,11 +61,19 @@
         </activity>
         <activity
             android:name="com.serialcoders.moneymanager.FinancialAccountActivity"
-            android:label="@string/title_activity_financial_account" >
+            android:label="@string/title_activity_financial_account"
+            android:parentActivityName="com.serialcoders.moneymanager.UserAccountActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.serialcoders.moneymanager.UserAccountActivity" />
         </activity>
         <activity
             android:name="com.serialcoders.moneymanager.TransactionActivity"
-            android:label="@string/title_activity_transaction" >
+            android:label="@string/title_activity_transaction"
+            android:parentActivityName="com.serialcoders.moneymanager.FinancialAccountActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.serialcoders.moneymanager.FinancialAccountActivity" />
         </activity>
         <activity
             android:name="com.serialcoders.moneymanager.AddProfilePictureActivity"
