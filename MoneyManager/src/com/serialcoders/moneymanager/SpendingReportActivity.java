@@ -19,7 +19,6 @@ import android.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +38,6 @@ public class SpendingReportActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_spending_report);
-		// Show the Up button in the action bar.
-		setupActionBar();
 		
 		user = ParseUser.getCurrentUser();
 		dateTo = new Date();
@@ -157,22 +154,6 @@ public class SpendingReportActivity extends Activity {
 	    
 		TextView balance = (TextView) findViewById(R.id.total_withdrawals);
 		balance.setText("Withdrawals: $" + totalWithdrawals);
-	}
-
-	/**
-	 * Set up the {@link android.app.ActionBar}.
-	 */
-	private void setupActionBar() {
-
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.spending_report, menu);
-		return true;
 	}
 
 	@Override
