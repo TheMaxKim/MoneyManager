@@ -56,5 +56,9 @@
     <string name="back_to_accounts">Back</string>
     <string name="title_activity_spending_report">SpendingReportActivity</string>
     <string name="view_report">View Spending Report</string>
+    <string name="title_activity_drawer">MoneyManager</string>
+    <string name="drawer_title">Menu</string>
+    <string name="drawer_close">Close drawer</string>
+    <string name="drawer_open">Open drawer</string>
 
 </resources>

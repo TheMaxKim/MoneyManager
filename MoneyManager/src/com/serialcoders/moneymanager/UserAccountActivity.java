@@ -8,17 +8,19 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,13 +35,24 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+
 
 public class UserAccountActivity extends Activity {
 	
 	private ParseUser user;
 	private ParseFile profilePhotoFile;
 	private ImageView profilePictureView;
-	
+	private DrawerLayout drawerLayout;
+	private ListView drawerList;
+	private ActionBarDrawerToggle drawerToggle;
+	private ArrayList<String> drawerItems;
+	private ArrayAdapter adapter;
+	String logOutString = "Log Out";
+	String myAccountString = "My Accounts";
+	String spendingReportString = "Spending Report";
+		
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 
@@ -127,8 +140,97 @@ public class UserAccountActivity extends Activity {
         });
 		
 		
+	    drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerList = (ListView) findViewById(R.id.left_drawer);
+        
+        // Populate list with options
+		drawerItems = new ArrayList<String>();
+		drawerItems.add(myAccountString);
+		drawerItems.add(spendingReportString);
+		drawerItems.add(logOutString);
+		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, drawerItems);
+		drawerList.setAdapter(adapter);
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                drawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+                ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getActionBar().setTitle(R.string.title_activity_drawer);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getActionBar().setTitle(R.string.drawer_title);
+            }
+        };
+        
+        drawerLayout.setDrawerListener(drawerToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayShowTitleEnabled(false);
+
+        // Set the list's click listener
+        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+	    
+	    
 	}
 	
+	@Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+	
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (drawerToggle.onOptionsItemSelected(item)) {
+          return true;
+        }
+        return true;
+    }
+	
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+
+			final String item = (String) parent.getItemAtPosition(position);
+
+			if (item.equals(logOutString)) {
+				user.logOut();
+        		Toast.makeText(UserAccountActivity.this, "Successfully logged out!", Toast.LENGTH_LONG).show();
+        		Intent in = new Intent(UserAccountActivity.this, Login.class);
+				startActivity(in);
+			} else if (item.equals(myAccountString)) {
+				Intent i = new Intent(UserAccountActivity.this, UserAccountActivity.class);
+				startActivity(i);
+			} else if (item.equals(spendingReportString)){
+				Intent i = new Intent(UserAccountActivity.this, SpendingReportActivity.class);
+				startActivity(i);
+			} 
+			
+			drawerLayout.closeDrawer(drawerList);
+		}
+	}
+    
 	public void addAccount(View v) {
 		Intent i = new Intent(UserAccountActivity.this, CreateAccount.class);
 		startActivity(i);
@@ -143,5 +245,5 @@ public class UserAccountActivity extends Activity {
 		Intent in = new Intent(UserAccountActivity.this, SpendingReportActivity.class);
 		startActivity(in);
 	}
-	
+
 }

@@ -1,118 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
+    
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/welcomemessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
-        android:text="@string/hello_world" />
+    	<TextView
+        	android:id="@+id/welcomemessage"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginTop="66dp"
+        	android:text="@string/hello_world" />
 
-    <LinearLayout
-        android:id="@+id/account_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/changepicture"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
-        android:orientation="vertical" >
+    	<LinearLayout
+        	android:id="@+id/account_list"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/changepicture"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginTop="49dp"
+        	android:orientation="vertical" >
 
-    </LinearLayout>
+    	</LinearLayout>
 
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="@string/logout" />
+    	<Button
+        	android:id="@+id/button_logout"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentBottom="true"
+        	android:layout_alignParentLeft="true"
+        	android:background="?android:attr/selectableItemBackground"
+        	android:text="@string/logout" />
 
-    <Button
-        android:id="@+id/button_add_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/view1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/view1"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawablePadding="2dip"
-        android:onClick="addAccount"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:text="@string/add_account" />
+    	<Button
+        	android:id="@+id/button_add_account"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignBottom="@+id/view1"
+        	android:layout_alignParentLeft="true"
+        	android:layout_alignParentTop="true"
+        	android:layout_toLeftOf="@+id/view1"
+        	android:background="?android:attr/selectableItemBackground"
+        	android:drawablePadding="2dip"
+        	android:onClick="addAccount"
+        	android:paddingLeft="15dip"
+        	android:paddingRight="15dip"
+        	android:text="@string/add_account" />
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="1dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/darker_gray" />
+    	<View
+        	android:id="@+id/view1"
+        	android:layout_width="1dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentTop="true"
+        	android:layout_centerHorizontal="true"
+        	android:background="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/button_remove_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/view1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/view1"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawablePadding="2dip"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:text="@string/remove_account" />
+    	<Button
+        	android:id="@+id/button_remove_account"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignBottom="@+id/view1"
+        	android:layout_alignParentRight="true"
+        	android:layout_alignParentTop="true"
+        	android:layout_toRightOf="@+id/view1"
+        	android:background="?android:attr/selectableItemBackground"
+        	android:drawablePadding="2dip"
+        	android:paddingLeft="15dip"
+        	android:paddingRight="15dip"
+        	android:text="@string/remove_account" />
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_add_account"
-        android:background="@android:color/darker_gray" />
+    	<View
+        	android:id="@+id/view3"
+        	android:layout_width="wrap_content"
+        	android:layout_height="1dp"
+        	android:layout_alignParentLeft="true"
+        	android:layout_below="@+id/button_add_account"
+        	android:background="@android:color/darker_gray" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/button_logout"
-        android:background="@android:color/darker_gray" />
+    	<View
+        	android:id="@+id/view2"
+        	android:layout_width="wrap_content"
+        	android:layout_height="1dp"
+        	android:layout_alignParentLeft="true"
+        	android:layout_alignTop="@+id/button_logout"
+        	android:background="@android:color/darker_gray" />
 
-    <ImageView
-        android:id="@+id/profilepicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/welcomemessage"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/default_profile_pic" />
+    	<ImageView
+        	android:id="@+id/profilepicture"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/welcomemessage"
+        	android:layout_centerHorizontal="true"
+        	android:src="@drawable/default_profile_pic" />
 
-    <Button
-        android:id="@+id/changepicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profilepicture"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/green_button"
-        android:text="@string/change_profile_picture"
-        android:textSize="10sp" />
+    	<Button
+        	android:id="@+id/changepicture"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/profilepicture"
+        	android:layout_centerHorizontal="true"
+        	android:background="@drawable/green_button"
+        	android:text="@string/change_profile_picture"
+        	android:textSize="10sp" />
 
-    <Button
-        android:id="@+id/view_report"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_logout"
-        android:background="@drawable/green_button"
-        android:onClick="viewReport"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/view_report" />
+    	<Button
+        	android:id="@+id/view_report"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_above="@+id/button_logout"
+        	android:background="@drawable/green_button"
+        	android:onClick="viewReport"
+        	android:layout_alignParentLeft="true"
+        	android:layout_alignParentRight="true"
+        	android:text="@string/view_report" />
 
-</RelativeLayout>
+	</RelativeLayout>
+	
+	<ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="185dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:textColor="#000000"
+        android:background="#ffffff"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/black"
+        android:dividerHeight="0dp" />
+	
+</android.support.v4.widget.DrawerLayout>
