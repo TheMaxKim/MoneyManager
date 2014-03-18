@@ -148,7 +148,7 @@ public class UserAccountActivity extends Activity {
 		drawerItems.add(myAccountString);
 		drawerItems.add(spendingReportString);
 		drawerItems.add(logOutString);
-		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, drawerItems);
+		adapter = new ArrayAdapter(this, R.layout.draw_list_layout, drawerItems);
 		drawerList.setAdapter(adapter);
 
         drawerToggle = new ActionBarDrawerToggle(

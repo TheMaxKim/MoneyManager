@@ -128,10 +128,10 @@
         android:layout_width="185dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:textColor="#000000"
-        android:background="#ffffff"
+        android:textColor="#ffffff"
+        android:background="#4c4c4c"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/black"
-        android:dividerHeight="0dp" />
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp" />
 	
 </android.support.v4.widget.DrawerLayout>
