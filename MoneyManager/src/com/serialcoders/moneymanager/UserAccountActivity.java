@@ -52,6 +52,7 @@ public class UserAccountActivity extends Activity {
 	String logOutString = "Log Out";
 	String myAccountString = "My Accounts";
 	String spendingReportString = "Spending Report";
+	String transactionMapString = "Transaction Map";
 		
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -147,6 +148,7 @@ public class UserAccountActivity extends Activity {
 		drawerItems = new ArrayList<String>();
 		drawerItems.add(myAccountString);
 		drawerItems.add(spendingReportString);
+		drawerItems.add(transactionMapString);
 		drawerItems.add(logOutString);
 		adapter = new ArrayAdapter(this, R.layout.draw_list_layout, drawerItems);
 		drawerList.setAdapter(adapter);
@@ -224,6 +226,9 @@ public class UserAccountActivity extends Activity {
 				startActivity(i);
 			} else if (item.equals(spendingReportString)){
 				Intent i = new Intent(UserAccountActivity.this, SpendingReportActivity.class);
+				startActivity(i);
+			} else if (item.equals(transactionMapString)){
+				Intent i = new Intent(UserAccountActivity.this, TransactionMapActivity.class);
 				startActivity(i);
 			} 
 			
