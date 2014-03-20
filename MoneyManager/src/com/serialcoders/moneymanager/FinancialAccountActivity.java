@@ -69,7 +69,7 @@ public class FinancialAccountActivity extends Activity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
 	    List<ParseObject> transactionList;
         query.whereEqualTo("accountFullName", passedName);
-        query.whereEqualTo("userName", user);
+        query.whereEqualTo("userName", user.getUsername());
 	    try {
 	    	transactionList = query.find();
 	    } catch (ParseException e) {

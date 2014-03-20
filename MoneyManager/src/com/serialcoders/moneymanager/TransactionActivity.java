@@ -4,10 +4,11 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
+import com.parse.ParseGeoPoint;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
@@ -15,21 +16,32 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
-public class TransactionActivity extends Activity {
+
+public class TransactionActivity extends Activity implements LocationListener {
 	Double amount;
 	String target;
 	String passedName;
 	String transactionType; 
+	LocationManager mLocationManager;
+	ParseGeoPoint transactionLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_transaction);
 		Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
-
+		
 		Intent intent = getIntent();
 		passedName = intent.getExtras().getString("FinancialAccountName");
+		
+		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		
+		final Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        transactionLocation = geoPointFromLocation(location);
 	}
 
 	@Override
@@ -100,11 +112,40 @@ public class TransactionActivity extends Activity {
 		transaction.put("accountFullName", passedName);
 		transaction.put("amount", amount);
 		transaction.put("target", target);
-		transaction.put("userName", user);
+		transaction.put("userName", user.getUsername());
 		transaction.put("transactionType", transactionType);
+		transaction.put("transactionLocation", transactionLocation);
 		transaction.saveInBackground();
 	
 		Toast.makeText(TransactionActivity.this, "Transaction made!", Toast.LENGTH_LONG).show();
 
+	}
+	
+	private ParseGeoPoint geoPointFromLocation(Location location) {
+		  return new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+	}
+
+	@Override
+	public void onLocationChanged(Location arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
+		
 	}
 }

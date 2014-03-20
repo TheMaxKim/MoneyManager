@@ -123,7 +123,7 @@ public class SpendingReportActivity extends Activity {
 		Log.d("tag2", "hit this");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
 	    List<ParseObject> transactionList;
-        query.whereEqualTo("userName", user);
+        query.whereEqualTo("userName", user.getUsername());
         query.whereLessThan("amount", 0); //only get negative amounts
         Log.d("tag3", dateFrom.toString());
         Log.d("tag3", dateTo.toString());
