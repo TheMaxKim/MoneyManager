@@ -30,14 +30,7 @@
 
     	</LinearLayout>
 
-    	<Button
-        	android:id="@+id/button_logout"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:layout_alignParentBottom="true"
-        	android:layout_alignParentLeft="true"
-        	android:background="?android:attr/selectableItemBackground"
-        	android:text="@string/logout" />
+    	
 
     	<Button
         	android:id="@+id/button_add_account"
@@ -110,16 +103,7 @@
         	android:text="@string/change_profile_picture"
         	android:textSize="10sp" />
 
-    	<Button
-        	android:id="@+id/view_report"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_above="@+id/button_logout"
-        	android:background="@drawable/green_button"
-        	android:onClick="viewReport"
-        	android:layout_alignParentLeft="true"
-        	android:layout_alignParentRight="true"
-        	android:text="@string/view_report" />
+    	
 
 	</RelativeLayout>
 	

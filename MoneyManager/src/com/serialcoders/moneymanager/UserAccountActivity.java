@@ -127,20 +127,7 @@ public class UserAccountActivity extends Activity {
             	}
             });
 	    }
-	    
-	    findViewById(R.id.button_logout).setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View view) {
-        			
-        		user.logOut();
-        		
-        		Toast.makeText(UserAccountActivity.this, "Successfully logged out!", Toast.LENGTH_LONG).show();
-        		Intent in = new Intent(UserAccountActivity.this, Login.class);
-				startActivity(in);
-
-        	}
-        });
-		
-		
+	    	
 	    drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
         
@@ -246,9 +233,6 @@ public class UserAccountActivity extends Activity {
 		//TODO Add remove account functionality for button
 	}
 	
-	public void viewReport(View v) {
-		Intent in = new Intent(UserAccountActivity.this, SpendingReportActivity.class);
-		startActivity(in);
-	}
+	
 
 }
