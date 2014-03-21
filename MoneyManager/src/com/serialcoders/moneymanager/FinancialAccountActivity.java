@@ -74,7 +74,7 @@ public class FinancialAccountActivity extends Activity {
 	    	Toast.makeText(this, "Cannot load transactions: " + e, Toast.LENGTH_LONG).show();
 	    }
     
-	    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	    DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 	    for (ParseObject a : transactionList) {
 	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.
 	    	textView.setText(a.getString("displayName"));

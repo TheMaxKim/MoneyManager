@@ -85,7 +85,7 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
 		  try {
 			  transactionList = transactionQuery.find();
 			  Set<String> toKeep = new HashSet<String>();
-			  DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+			  DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 	      	  //loops through results of search
 	      	  for(ParseObject transaction : transactionList)	{
 	      		  //add this post to list of map pins to keep

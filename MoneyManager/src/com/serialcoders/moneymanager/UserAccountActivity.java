@@ -1,5 +1,6 @@
 package com.serialcoders.moneymanager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,14 +105,15 @@ public class UserAccountActivity extends Activity {
 	    
 	    
 	    
-	    for (ParseObject a : accountList) {
+	    for (final ParseObject a : accountList) {
 	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.
 	    	textView.setText(a.getString("displayName"));
 	    	LinearLayout ll = (LinearLayout) findViewById(R.id.account_list);
 	    	
 	    	ll.addView(textView);*/
 	    	Button accountButton = new Button(UserAccountActivity.this);
-	    	accountButton.setText(a.getString("displayName"));
+	    	
+	    	accountButton.setText("Account name: " + a.getString("displayName") + "   Current Balance: " + DecimalFormat.getCurrencyInstance().format(a.getDouble("currentBalance")));
 	    	accountButton.setBackgroundResource(R.drawable.green_button);
 	    	LinearLayout ll = (LinearLayout)findViewById(R.id.account_list);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -120,7 +122,7 @@ public class UserAccountActivity extends Activity {
             accountButton.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) {
             		Button pressedButton = (Button) view;
-            		String passedAccount = pressedButton.getText().toString();
+            		String passedAccount = a.getString("displayName");
             		Intent in = new Intent(UserAccountActivity.this, FinancialAccountActivity.class);
             		in.putExtra("FinancialAccountName", passedAccount);
             		startActivity(in);

@@ -138,7 +138,7 @@ public class SpendingReportActivity extends Activity {
 	    }
 	    
 	    Double totalWithdrawals = 0.0;
-	    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	    DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 	    LinearLayout ll = (LinearLayout)findViewById(R.id.withdrawal_list);
     	ll.removeAllViews();
 	    for (ParseObject o : transactionList) {
