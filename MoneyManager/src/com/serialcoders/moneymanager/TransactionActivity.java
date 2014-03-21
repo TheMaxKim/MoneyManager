@@ -1,6 +1,10 @@
 package com.serialcoders.moneymanager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -28,6 +32,9 @@ public class TransactionActivity extends Activity implements LocationListener {
 	String transactionType; 
 	LocationManager mLocationManager;
 	ParseGeoPoint transactionLocation;
+	ParseUser user;
+	ParseObject selectedAccount;
+	Double currentAccountBalance;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +45,24 @@ public class TransactionActivity extends Activity implements LocationListener {
 		Intent intent = getIntent();
 		passedName = intent.getExtras().getString("FinancialAccountName");
 		
-		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		
+		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);		
 		final Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         transactionLocation = geoPointFromLocation(location);
+        
+        user = ParseUser.getCurrentUser();
+        ParseQuery<ParseObject> accountQuery = ParseQuery.getQuery("Account");
+	    List<ParseObject> accountList;
+	    accountQuery.whereEqualTo("username", user.getUsername());
+	    accountQuery.whereEqualTo("displayName", passedName);
+	    try {
+	    	accountList = accountQuery.find();
+	    } catch (ParseException e) {
+	    	accountList = new ArrayList<ParseObject>();
+	    	Toast.makeText(this, "Cannot load account information: " + e, Toast.LENGTH_LONG).show();
+	    }
+	    selectedAccount = accountList.get(0);
+	    currentAccountBalance = (Double) selectedAccount.getDouble("currentBalance");
+	    
 	}
 
 	@Override
@@ -102,12 +123,14 @@ public class TransactionActivity extends Activity implements LocationListener {
         if (rbw.isChecked()) {
         	amount = -amount;
         	transactionType = "Withdrawal";
+        	currentAccountBalance += amount;
         }
         else{
         	transactionType = "Deposit";
+        	currentAccountBalance += amount;
         }
         
-        ParseUser user = ParseUser.getCurrentUser();
+        
         ParseObject transaction = new ParseObject("Transaction");
 		transaction.put("accountFullName", passedName);
 		transaction.put("amount", amount);
@@ -116,9 +139,13 @@ public class TransactionActivity extends Activity implements LocationListener {
 		transaction.put("transactionType", transactionType);
 		transaction.put("transactionLocation", transactionLocation);
 		transaction.saveInBackground();
-	
+		
+		selectedAccount.put("currentBalance", currentAccountBalance);
+		selectedAccount.saveInBackground();
+		
 		Toast.makeText(TransactionActivity.this, "Transaction made!", Toast.LENGTH_LONG).show();
-
+		finish();
+		startActivity(getIntent());
 	}
 	
 	private ParseGeoPoint geoPointFromLocation(Location location) {

@@ -1,6 +1,7 @@
 package com.serialcoders.moneymanager;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +29,8 @@ public class FinancialAccountActivity extends Activity {
 
 	String passedName;
 	ParseObject currentFinancialAccount;
-	String accountInitialBalance;
+	Double accountCurrentBalance;
+	 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +60,9 @@ public class FinancialAccountActivity extends Activity {
 	    	Toast.makeText(this, "Cannot load account information: " + e, Toast.LENGTH_LONG).show();
 	    }
 	    for (ParseObject account : accountList) {
-	    	accountInitialBalance = (String) account.get("initialBalance");
+	    	accountCurrentBalance = (Double) account.getDouble("currentBalance");
 	    }
-	    
-	    
-	    
-		
-		
-		
+	    	
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
 	    List<ParseObject> transactionList;
         query.whereEqualTo("accountFullName", passedName);
@@ -76,11 +73,7 @@ public class FinancialAccountActivity extends Activity {
 	    	transactionList = new ArrayList<ParseObject>();
 	    	Toast.makeText(this, "Cannot load transactions: " + e, Toast.LENGTH_LONG).show();
 	    }
-	    Double totalBalance = 0.0;
-	    if(accountInitialBalance != null){
-	    	totalBalance = Double.parseDouble(accountInitialBalance);
-	    }
-	    
+    
 	    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	    for (ParseObject a : transactionList) {
 	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.
@@ -90,8 +83,14 @@ public class FinancialAccountActivity extends Activity {
 	    	ll.addView(textView);*/
 	    	Button accountButton = new Button(this);
 	    	Date transactionDate = a.getCreatedAt();    	
-	    	accountButton.setText(a.get("transactionType") + "   " + Double.toString(a.getDouble("amount")) + " on " + df.format(transactionDate));
-	    	accountButton.setBackgroundResource(R.drawable.green_button);
+	    	if(a.getDouble("amount")<0){
+	    		accountButton.setText(a.get("transactionType") + " " + DecimalFormat.getCurrencyInstance().format(-a.getDouble("amount")) + " on " + df.format(transactionDate));
+		    	accountButton.setBackgroundResource(R.drawable.red_button);
+	    	}
+	    	else{
+	    		accountButton.setText(a.get("transactionType") + " " + DecimalFormat.getCurrencyInstance().format(a.getDouble("amount")) + " on " + df.format(transactionDate));
+		    	accountButton.setBackgroundResource(R.drawable.green_button);
+	    	}	    
 	    	LinearLayout ll = (LinearLayout)findViewById(R.id.transaction_list);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);
@@ -101,12 +100,13 @@ public class FinancialAccountActivity extends Activity {
             		Button pressedButton = (Button) view;
             	}
             });
-            totalBalance += a.getDouble("amount");
+            
 	    }
         
 		
 		TextView balance = (TextView) findViewById(R.id.balance);
-		balance.setText("Balance: $" + totalBalance);
+		String moneyFormatBalance = DecimalFormat.getCurrencyInstance().format(accountCurrentBalance);
+		balance.setText("Balance: " + moneyFormatBalance);
 	    
 	}
 

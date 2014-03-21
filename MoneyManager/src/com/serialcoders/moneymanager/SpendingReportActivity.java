@@ -1,6 +1,7 @@
 package com.serialcoders.moneymanager;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -143,8 +144,14 @@ public class SpendingReportActivity extends Activity {
 	    for (ParseObject o : transactionList) {
 	    	Button accountButton = new Button(this);
 	    	Date transactionDate = o.getCreatedAt();
-	    	accountButton.setText(o.get("transactionType") + "   " + Double.toString(o.getDouble("amount")) + " from " + o.get("accountFullName") + "\n on " + df.format(transactionDate));
-	    	accountButton.setBackgroundResource(R.drawable.green_button);
+	    	if(o.getDouble("amount")<0){
+	    		accountButton.setText(o.get("transactionType") + " " + DecimalFormat.getCurrencyInstance().format(-o.getDouble("amount")) + " from " + o.get("accountFullName") + "\n on " + df.format(transactionDate));
+	    		accountButton.setBackgroundResource(R.drawable.red_button);
+	    	}
+	    	else{
+	    		accountButton.setText(o.get("transactionType") + " " + DecimalFormat.getCurrencyInstance().format(o.getDouble("amount")) + " from " + o.get("accountFullName") + "\n on " + df.format(transactionDate));
+	    		accountButton.setBackgroundResource(R.drawable.green_button);
+	    	}
 	    	
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);

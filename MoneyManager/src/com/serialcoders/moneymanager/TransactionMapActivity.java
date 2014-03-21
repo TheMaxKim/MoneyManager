@@ -1,5 +1,6 @@
 package com.serialcoders.moneymanager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -85,9 +86,18 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
 	      	  //loops through results of search
 	      	  for(ParseObject transaction : transactionList)	{
 	      		  //add this post to list of map pins to keep
-	      		  toKeep.add(transaction.getObjectId());					
-	      		  String title = transaction.get("amount").toString().substring(0, 1);
-	      		  title = title.concat(transaction.get("amount").toString().substring(1).toLowerCase());
+	      		  toKeep.add(transaction.getObjectId());
+	      		  String title;
+	      		  if(transaction.getDouble("amount")<0){
+	      			title = DecimalFormat.getCurrencyInstance().format(-transaction.getDouble("amount"));
+	      			title = "Withdrawal " + title;
+	      		  }
+	      		  else{
+	      			title = DecimalFormat.getCurrencyInstance().format(transaction.getDouble("amount")); 
+	      			title = "Deposit " + title;
+	      		  }
+	      		 
+	      		  //title = title.concat(transaction.get("amount").toString().substring(1).toLowerCase());
 	      		  LatLng position = new LatLng(transaction.getParseGeoPoint("transactionLocation").getLatitude(),transaction.getParseGeoPoint("transactionLocation").getLongitude());
 	      		  newMarkerList.add(map.addMarker(new MarkerOptions().position(position).title(title)));  		  
 	      	  }
