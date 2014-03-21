@@ -1,6 +1,8 @@
 package com.serialcoders.moneymanager;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -82,24 +85,28 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
 		  try {
 			  transactionList = transactionQuery.find();
 			  Set<String> toKeep = new HashSet<String>();
-			  
+			  DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	      	  //loops through results of search
 	      	  for(ParseObject transaction : transactionList)	{
 	      		  //add this post to list of map pins to keep
 	      		  toKeep.add(transaction.getObjectId());
 	      		  String title;
+	      		  LatLng position = new LatLng(transaction.getParseGeoPoint("transactionLocation").getLatitude(),transaction.getParseGeoPoint("transactionLocation").getLongitude());
+	      		  String date = df.format(transaction.getCreatedAt());
 	      		  if(transaction.getDouble("amount")<0){
 	      			title = DecimalFormat.getCurrencyInstance().format(-transaction.getDouble("amount"));
-	      			title = "Withdrawal " + title;
+	      			title = "Withdrawal " + title + " on " + date;
+	      			newMarkerList.add(map.addMarker(new MarkerOptions().position(position).title(title).icon(BitmapDescriptorFactory.fromResource(R.drawable.withdrawal_marker)))); 
 	      		  }
 	      		  else{
 	      			title = DecimalFormat.getCurrencyInstance().format(transaction.getDouble("amount")); 
-	      			title = "Deposit " + title;
+	      			title = "Deposit " + title + " on " + date;
+	      			newMarkerList.add(map.addMarker(new MarkerOptions().position(position).title(title).icon(BitmapDescriptorFactory.fromResource(R.drawable.deposit_marker)))); 
 	      		  }
 	      		 
 	      		  //title = title.concat(transaction.get("amount").toString().substring(1).toLowerCase());
-	      		  LatLng position = new LatLng(transaction.getParseGeoPoint("transactionLocation").getLatitude(),transaction.getParseGeoPoint("transactionLocation").getLongitude());
-	      		  newMarkerList.add(map.addMarker(new MarkerOptions().position(position).title(title)));  		  
+	      		  
+	      		   		  
 	      	  }
 		  } catch (ParseException e) {
 			  transactionList = new ArrayList<ParseObject>();
