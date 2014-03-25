@@ -16,6 +16,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -54,11 +55,11 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        //setContentView(R.layout.activity_map);
         
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         user = ParseUser.getCurrentUser();
-        
+        Log.d("fragMan",getFragmentManager().findFragmentById(R.id.map).toString());
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
                 .getMap();       
 
@@ -78,7 +79,10 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
     	  transactionQuery.whereEqualTo("userName", user.getUsername());
     	  
 		  mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);        
-		  final Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		  Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		  if (location == null) {
+			  location = new Location("default");
+		  }
 		  final ParseGeoPoint userLocation = geoPointFromLocation(location);
 		  
 		  List<ParseObject> transactionList;
