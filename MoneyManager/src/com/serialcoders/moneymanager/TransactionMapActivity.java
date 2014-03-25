@@ -79,7 +79,7 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
     	  transactionQuery.whereEqualTo("userName", user.getUsername());
     	  
 		  mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);        
-		  Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		  Location location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		  if (location == null) {
 			  location = new Location("default");
 		  }
