@@ -55,11 +55,11 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_map);
         
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         user = ParseUser.getCurrentUser();
-        Log.d("fragMan",getFragmentManager().findFragmentById(R.id.map).toString());
+        
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
                 .getMap();       
 

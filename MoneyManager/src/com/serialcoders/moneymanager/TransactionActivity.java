@@ -46,11 +46,11 @@ public class TransactionActivity extends Activity implements LocationListener {
 		passedName = intent.getExtras().getString("FinancialAccountName");
 		
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);		
-		Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		Location location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (location == null) {
 			location = new Location("default");
 		}
-        transactionLocation = geoPointFromLocation(location);
+		transactionLocation = geoPointFromLocation(location);
         
         user = ParseUser.getCurrentUser();
         ParseQuery<ParseObject> accountQuery = ParseQuery.getQuery("Account");
