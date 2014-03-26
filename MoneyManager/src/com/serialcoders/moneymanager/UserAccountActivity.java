@@ -61,76 +61,23 @@ public class UserAccountActivity extends Activity {
 		ScrollView sv = new ScrollView(this);
 	    setContentView(R.layout.activity_useraccount);
 	    
-	    Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
-	    
+	    Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3"); 
 	    user = ParseUser.getCurrentUser();
 	    
-	    TextView textView = (TextView) findViewById(R.id.welcomemessage);
-	    String username = user.getUsername();
-	    textView.setText("Welcome to MoneyManager, " + username + "!");
-	    
-	    List<ParseObject> accountList;
-	    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
-	    query.whereEqualTo("username", user.getUsername());
-	    try {
-	    	accountList = query.find();
-	    } catch (ParseException e) {
-	    	accountList = new ArrayList<ParseObject>();
-	    	Toast.makeText(UserAccountActivity.this, "Cannot load Accounts: " + e, Toast.LENGTH_LONG).show();
-	    }
-	    
-	    this.profilePictureView = (ImageView)this.findViewById(R.id.profilepicture);
-	    profilePhotoFile = user.getParseFile("profilePhoto");
-	    if (profilePhotoFile != null){
-	    	
-	    	byte[] data;
-			try {
-				data = profilePhotoFile.getData();
-				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-		    	profilePictureView.setImageBitmap(bitmap);
-			} catch (ParseException e) {
-				Toast.makeText(UserAccountActivity.this, "Cannot Show Profile Picture: " + e, Toast.LENGTH_LONG).show();
-			}
-	    	
-	    }
-	    
-	   
-        findViewById(R.id.changepicture).setOnClickListener(new View.OnClickListener() {		
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(UserAccountActivity.this, AddProfilePictureActivity.class);
-				startActivity(i);	
-			}
-		});
-	    
-	    
-	    
-	    for (final ParseObject a : accountList) {
-	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.
-	    	textView.setText(a.getString("displayName"));
-	    	LinearLayout ll = (LinearLayout) findViewById(R.id.account_list);
-	    	
-	    	ll.addView(textView);*/
-	    	Button accountButton = new Button(UserAccountActivity.this);
-	    	
-	    	accountButton.setText("Account name: " + a.getString("displayName") + "   Current Balance: " + DecimalFormat.getCurrencyInstance().format(a.getDouble("currentBalance")));
-	    	accountButton.setBackgroundResource(R.drawable.green_button);
-	    	LinearLayout ll = (LinearLayout)findViewById(R.id.account_list);
-            LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            ll.addView(accountButton, lp);
-            
-            accountButton.setOnClickListener(new View.OnClickListener() {
-            	public void onClick(View view) {
-            		Button pressedButton = (Button) view;
-            		String passedAccount = a.getString("displayName");
-            		Intent in = new Intent(UserAccountActivity.this, FinancialAccountActivity.class);
-            		in.putExtra("FinancialAccountName", passedAccount);
-            		startActivity(in);
-            	}
-            });
-	    }
-	    	
-	    drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+	    displayWelcome();
+	    updateProfilePicture();   
+	    findAccounts();
+	    createDrawer();
+	}
+	
+	protected void onResume() {
+		super.onResume();
+		
+		findAccounts();
+	}
+	
+	private void createDrawer() {
+		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
         
         // Populate list with options
@@ -171,8 +118,75 @@ public class UserAccountActivity extends Activity {
 
         // Set the list's click listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
+	}
+	
+	private void displayWelcome() {
+		TextView textView = (TextView) findViewById(R.id.welcomemessage);
+	    String username = user.getUsername();
+	    textView.setText("Welcome to MoneyManager, " + username + "!");
+	}
+	
+	private void updateProfilePicture() {
+		this.profilePictureView = (ImageView)this.findViewById(R.id.profilepicture);
+	    profilePhotoFile = user.getParseFile("profilePhoto");
+	    if (profilePhotoFile != null){
+	    	
+	    	byte[] data;
+			try {
+				data = profilePhotoFile.getData();
+				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+		    	profilePictureView.setImageBitmap(bitmap);
+			} catch (ParseException e) {
+				Toast.makeText(UserAccountActivity.this, "Cannot Show Profile Picture: " + e, Toast.LENGTH_LONG).show();
+			}
+	    	
+	    }
 	    
+	    findViewById(R.id.changepicture).setOnClickListener(new View.OnClickListener() {		
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(UserAccountActivity.this, AddProfilePictureActivity.class);
+				startActivity(i);	
+			}
+		});
+	}
+	
+	private void findAccounts() {
+		List<ParseObject> accountList;
+	    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+	    query.whereEqualTo("username", user.getUsername());
+	    try {
+	    	accountList = query.find();
+	    } catch (ParseException e) {
+	    	accountList = new ArrayList<ParseObject>();
+	    	Toast.makeText(UserAccountActivity.this, "Cannot load Accounts: " + e, Toast.LENGTH_LONG).show();
+	    }
 	    
+    	LinearLayout ll = (LinearLayout)findViewById(R.id.account_list);
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        ll.removeAllViews();
+	    for (final ParseObject a : accountList) {
+	    	/*textView = new TextView(UserAccountActivity.this);			//Old code for just listing the names of the accounts.
+	    	textView.setText(a.getString("displayName"));
+	    	LinearLayout ll = (LinearLayout) findViewById(R.id.account_list);
+	    	
+	    	ll.addView(textView);*/
+	    	Button accountButton = new Button(UserAccountActivity.this);
+	    	
+	    	accountButton.setText("Account name: " + a.getString("displayName") + "   Current Balance: " + DecimalFormat.getCurrencyInstance().format(a.getDouble("currentBalance")));
+	    	accountButton.setBackgroundResource(R.drawable.green_button);
+            ll.addView(accountButton, lp);
+            
+            accountButton.setOnClickListener(new View.OnClickListener() {
+            	public void onClick(View view) {
+            		Button pressedButton = (Button) view;
+            		String passedAccount = a.getString("displayName");
+            		Intent in = new Intent(UserAccountActivity.this, FinancialAccountActivity.class);
+            		in.putExtra("FinancialAccountName", passedAccount);
+            		startActivity(in);
+            	}
+            });
+	    }
 	}
 	
 	@Override
