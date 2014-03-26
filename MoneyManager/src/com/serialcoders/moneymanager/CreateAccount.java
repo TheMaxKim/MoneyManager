@@ -71,10 +71,10 @@ public class CreateAccount extends Activity {
 	        for (ParseObject a : accountList) {
 	            	String accountFullName = a.getString("fullName");
 	            	String accountDisplayName = a.getString("displayName");
-	            	if ((fullName.equals(accountFullName))) {
+	            	if ((fullName.equals(accountFullName) && user.getUsername().equals(a.get("username")))) {
 	            		Toast.makeText(CreateAccount.this, "An account with this name already exists!", Toast.LENGTH_LONG).show();
 	            		accountExists = true;
-	            	} else if ((displayName.equals(accountDisplayName))) {
+	            	} else if ((displayName.equals(accountDisplayName)) && user.getUsername().equals(a.get("username"))) {
 	            		Toast.makeText(CreateAccount.this, "An account with this display name already exists!", Toast.LENGTH_LONG).show();
 	            		accountExists = true;
 	            	}
