@@ -41,6 +41,7 @@ public class SpendingReportActivity extends Activity {
 		setContentView(R.layout.activity_spending_report);
 		
 		user = ParseUser.getCurrentUser();
+		c = Calendar.getInstance();
 		dateTo = new Date();
 		dateFrom = new Date(0);
 		
@@ -100,6 +101,9 @@ public class SpendingReportActivity extends Activity {
 				DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
 				try {
 					dateTo = dateFormat.parse(v.toString());
+					c.setTime(dateTo);
+					c.add(Calendar.DAY_OF_YEAR, 1);
+					dateTo = c.getTime();
 				} catch (java.text.ParseException e) {
 					dateTo = new Date();
 					Log.d("error1", e.getMessage());
