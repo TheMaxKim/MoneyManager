@@ -65,10 +65,8 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
 
         map.setMyLocationEnabled(true);
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        //LatLngBounds gaTech = new LatLngBounds(
-        		  //new LatLng(29.65, -82.34), new LatLng(29.67, -82.31));
-
-        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(gaTech.getCenter(), 11));
+        LatLngBounds gaTech = new LatLngBounds(new LatLng(33.7765, -84.4002), new LatLng(33.7765, -84.4002));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(gaTech.getCenter(), 15));
         
         doMapPop();
         

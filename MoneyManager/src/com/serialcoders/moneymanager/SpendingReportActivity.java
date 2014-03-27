@@ -132,6 +132,13 @@ public class SpendingReportActivity extends Activity {
         query.whereLessThan("amount", 0); //only get negative amounts
         Log.d("tag3", dateFrom.toString());
         Log.d("tag3", dateTo.toString());
+		
+		  // adds a day because of lessThanOrEqualTo having issues
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateTo);
+        cal.add(Calendar.DATE, 1);
+        dateTo = cal.getTime();
+		
         query.whereGreaterThanOrEqualTo("createdAt", dateFrom);
         query.whereLessThanOrEqualTo("createdAt", dateTo);
 	    try {
