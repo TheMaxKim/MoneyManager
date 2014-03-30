@@ -68,8 +68,14 @@ public class TransactionActivity extends Activity implements LocationListener {
      * @param currentAccountBalance current balance in the account
      */
     Double currentAccountBalance;
-    
-    
+    /**
+     * @param financialAccountName name of the account
+     */
+    String financialAccountName = "FinancialAccountName";
+    /**
+     * @param currentBalance current balance in the account
+     */
+    String currentBalance = "currentBalance";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +84,7 @@ public class TransactionActivity extends Activity implements LocationListener {
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         
         Intent intent = getIntent();
-        passedName = intent.getExtras().getString("FinancialAccountName");
+        passedName = intent.getExtras().getString(financialAccountName);
         
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);        
         Location location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -99,7 +105,7 @@ public class TransactionActivity extends Activity implements LocationListener {
             Toast.makeText(this, "Cannot load account information: " + e, Toast.LENGTH_LONG).show();
         }
         selectedAccount = accountList.get(0);
-        currentAccountBalance = (Double) selectedAccount.getDouble("currentBalance");
+        currentAccountBalance = (Double) selectedAccount.getDouble(currentBalance);
         
     }
     
@@ -147,7 +153,7 @@ public class TransactionActivity extends Activity implements LocationListener {
                         createTransaction(amount, target);
                         dialog.dismiss();
                         Intent i = new Intent(TransactionActivity.this, FinancialAccountActivity.class);
-                        i.putExtra("FinancialAccountName", passedName);
+                        i.putExtra(financialAccountName, passedName);
                         startActivity(i);
                     }
                 });
@@ -168,19 +174,21 @@ public class TransactionActivity extends Activity implements LocationListener {
      * 
      * Creates the the transaction with the specified amount and source. Change the account balance.
      * 
-     * @param amount transaction amount
-     * @param target transaction target
+     * @param amountValue transaction amount
+     * @param source transaction target
      */
-    public void createTransaction(Double amount, String target) {
+    public void createTransaction(Double amountValue, String source) {
 
         RadioButton rbw = (RadioButton) findViewById(R.id.withdrawRadio);
+        target = source;
         
         if (rbw.isChecked()) {
-            amount = -amount;
+            amount = -amountValue;
             transactionType = "Withdrawal";
             currentAccountBalance += amount;
         }
         else {
+            amount = amountValue;
             transactionType = "Deposit";
             currentAccountBalance += amount;
         }
@@ -195,7 +203,7 @@ public class TransactionActivity extends Activity implements LocationListener {
         transaction.put("transactionLocation", transactionLocation);
         transaction.saveInBackground();
         
-        selectedAccount.put("currentBalance", currentAccountBalance);
+        selectedAccount.put(currentBalance, currentAccountBalance);
         selectedAccount.saveInBackground();
         
         Toast.makeText(TransactionActivity.this, "Transaction made!", Toast.LENGTH_LONG).show();

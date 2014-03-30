@@ -30,7 +30,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -98,7 +97,7 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
         if (location == null) {
             location = new Location("default");
         }
-        final ParseGeoPoint userLocation = geoPointFromLocation(location);
+        
                  
         try {
             transactionList = transactionQuery.find();
@@ -176,13 +175,5 @@ public class TransactionMapActivity extends FragmentActivity implements  Locatio
         doMapWipe();
         doMapPop();    
     }
-    /**
-     * 
-     * Returns the location coordinates in ParseGeoPoint object.
-     * @param location current location
-     * @return ParseGeoPoint location
-     */
-    private ParseGeoPoint geoPointFromLocation(Location location) {
-        return new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-    }
+    
 }
