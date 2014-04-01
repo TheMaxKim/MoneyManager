@@ -27,7 +27,11 @@ public class AdminAccountActivity extends Activity {
 		getMenuInflater().inflate(R.menu.admin_account, menu);
 		return true;
 	}
-	
+	/**
+         * logs out the admin
+         * 
+         * @param v current view
+         */
 	public void logOut(View v) {
 		user.logOut();
 		
