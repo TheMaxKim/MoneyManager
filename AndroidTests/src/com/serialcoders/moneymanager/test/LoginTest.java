@@ -32,7 +32,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login>{
 		usernameView = (EditText) activity.findViewById(com.serialcoders.moneymanager.R.id.username);
 		passwordView = (EditText) activity.findViewById(com.serialcoders.moneymanager.R.id.password);
 		
-		loginButton = (Button) activity.findViewById(com.serialcoders.moneymanager.R.id.button_logIn);
+		loginButton = (Button) activity.findViewById(com.serialcoders.moneymanager.R.id.buttonLogin);
 	}
 	@UiThreadTest
 	public void testLogin() {

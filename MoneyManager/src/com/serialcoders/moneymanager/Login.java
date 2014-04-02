@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,13 +17,29 @@ import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-
+/**
+ * This activity represents the login screen of the financial app.
+ * @author Max Kim
+ *
+ */
 public class Login extends Activity {
-	private EditText usernameView;
+	/**
+	 * @param usernameView The textbox for the username to be entered.
+	 */
+    private EditText usernameView;
+    /**
+     * @param passwordView The textbox for the password to be entered.
+     */
     private EditText passwordView;
-    private Button button_logIn;
-    private Button button_register;
-	
+    /**
+     * @param buttonLogin The login button for the login screen.
+     */
+    private Button buttonLogin;
+    /**
+     * @param buttonRegister The register button for the login screen to make a new account.
+     */
+    private Button buttonRegister;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +52,10 @@ public class Login extends Activity {
         
         usernameView = (EditText) findViewById(R.id.username);
         passwordView = (EditText) findViewById(R.id.password);
-        button_logIn = (Button) findViewById(R.id.button_logIn);
-        button_register = (Button) findViewById(R.id.button_register);
+        buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
         
-        button_logIn.setOnClickListener(new View.OnClickListener() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 
                 final ProgressDialog dlg = new ProgressDialog(Login.this);
@@ -61,13 +75,13 @@ public class Login extends Activity {
                             Toast.makeText(Login.this, "Successfully Logged in!", Toast.LENGTH_LONG).show();
                             Intent i;
                             if (ParseUser.getCurrentUser().getUsername().equals("admin")) {
-                            	i = new Intent(Login.this, AdminAccountActivity.class);
+                                i = new Intent(Login.this, AdminAccountActivity.class);
                             } else {
-                            	i = new Intent(Login.this, UserAccountActivity.class);
+                                i = new Intent(Login.this, UserAccountActivity.class);
                             }
                             startActivity(i);
                         } else {
-                            Toast.makeText(Login.this, "Failed to login "+e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, "Failed to login " + e.toString(), Toast.LENGTH_LONG).show();
                             // Signup failed. Look at the ParseException to see what happened.
                         }
                         dlg.dismiss();
@@ -77,7 +91,7 @@ public class Login extends Activity {
         });
         
         // Sign up button
-        button_register.setOnClickListener(new View.OnClickListener() {
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Goto sign up screen
@@ -87,28 +101,10 @@ public class Login extends Activity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
-    
-    /**
-    public void login(View view) {
-    	EditText username = (EditText)findViewById(R.id.username);
-    	EditText password = (EditText)findViewById(R.id.password);
-    	if (username.getText().toString().equals("admin") &&
-    		password.getText().toString().equals("pass123")) {
-    	    	Toast.makeText(getApplicationContext(), "Success!", 
-    	    	      Toast.LENGTH_SHORT).show();
-    			Intent intent = new Intent(getApplicationContext(), LoginSuccess.class);
-    		    startActivity(intent);
-    	} else {
-    	      Toast.makeText(getApplicationContext(), "Incorrect Login Credentials", 
-    	    	      Toast.LENGTH_SHORT).show();
-    	}
-    } */
-    
 }
