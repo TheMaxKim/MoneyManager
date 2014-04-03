@@ -1,20 +1,10 @@
 package com.serialcoders.moneymanager.test;
 
-import com.parse.LogInCallback;
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.serialcoders.moneymanager.Login;
 import com.serialcoders.moneymanager.R;
 import com.serialcoders.moneymanager.SpendingReportActivity;
-
 import android.app.Activity;
-import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -56,6 +46,33 @@ public class FindWithdrawalsTest extends ActivityInstrumentationTestCase2<Spendi
 		Button button0 = (Button) list.getChildAt(0);
 		assertEquals(button0.getText(), "Withdrawal $250.00 from test #1\n on 03/24/2014 07:00:09 PM");
 	}
+	
+	@UiThreadTest
+	public void testError() {
+		
+		
+		dateTo.setText("03/31/2014");
+		dateFrom.setText("this should do nothing!");
+		
+		//SystemClock.sleep(7000); // need to allow time for parse to stuff.
+		
+		Button button0 = (Button) list.getChildAt(0);
+		assertEquals(button0, null);
+	}
+	@UiThreadTest
+	public void testFindWithdrawals2() {
+		
+		
+		dateTo.setText("3/26/14");
+		dateFrom.setText("3/25/14");
+		
+		//SystemClock.sleep(7000); // need to allow time for parse to stuff.
+		
+		Button button0 = (Button) list.getChildAt(0);
+		assertEquals(button0.getText(), "Withdrawal $8.00 from test #1\n on 03/25/2014 02:41:34 PM");
+	}
+	
+	
 	
 	
 }

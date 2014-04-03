@@ -53,7 +53,8 @@ public class SpendingReportActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spending_report);
 
-        Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
+        Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT",
+                "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         user = ParseUser.getCurrentUser();
         c = Calendar.getInstance();
         dateTo = new Date();
@@ -184,15 +185,7 @@ public class SpendingReportActivity extends Activity {
                      + o.get("accountFullName") + "\n on "
                      + df.format(transactionDate));
                 accountButton.setBackgroundResource(R.drawable.red_button);
-            } else {
-                accountButton.setText(o.get("transactionType") + " "
-                    + DecimalFormat.getCurrencyInstance()
-                    .format(o.getDouble("amount")) + " from "
-                    + o.get("accountFullName") + "\n on "
-                    + df.format(transactionDate));
-                accountButton.setBackgroundResource(R.drawable.green_button);
             }
-
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);

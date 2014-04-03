@@ -3,6 +3,7 @@ package com.serialcoders.moneymanager.test;
 import com.parse.ParseUser;
 import com.serialcoders.moneymanager.Login;
 import android.app.Activity;
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.widget.Button;
@@ -41,6 +42,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login>{
 		passwordView.setText("hello");
 		
 		loginButton.performClick();
+		SystemClock.sleep(5000);
 		assertEquals(ParseUser.getCurrentUser().getUsername(), "max");
 	}
 	

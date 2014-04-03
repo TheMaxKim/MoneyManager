@@ -1,17 +1,16 @@
 package com.serialcoders.moneymanager;
- 
+
  import java.text.DateFormat;
- import java.text.SimpleDateFormat;
  import java.util.Calendar;
  import java.util.Date;
- 
+
  import android.app.Dialog;
  import android.app.DialogFragment;
  import android.app.DatePickerDialog;
  import android.os.Bundle;
  import android.widget.DatePicker;
  import android.widget.EditText;
- 
+
  /**
   * Class used to set the text in an editText view
   * to whatever is chosen by the user.
@@ -32,7 +31,7 @@ package com.serialcoders.moneymanager;
       * The editText which the user is writing to.
       */
      private static EditText editText;
- 
+
      /**
       * Method called upon creation of the DatePickerFragment.
       *
@@ -42,14 +41,14 @@ package com.serialcoders.moneymanager;
      public final Dialog onCreateDialog(final Bundle saved) {
          editText = (EditText) getActivity().findViewById(getArguments()
                  .getInt("EditText"));
- 
+
          final int year = CALENDAR.get(Calendar.YEAR);
          final int month = CALENDAR.get(Calendar.MONTH);
          final int day = CALENDAR.get(Calendar.DAY_OF_MONTH);
- 
+
          return new DatePickerDialog(getActivity(), this, year, month, day);
      }
- 
+
      /**
       *  Method called when the date is set by the user.
       *  sets the editText to this date
