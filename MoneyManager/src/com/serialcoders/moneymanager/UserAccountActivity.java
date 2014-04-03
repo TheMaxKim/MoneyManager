@@ -87,6 +87,10 @@ public class UserAccountActivity extends Activity {
      */
     private String transactionMapString = "Transaction Map";
     /**
+     * display name string.
+     */
+    private String displayName = "displayName";
+    /**
      * called when the activity is first started.
      *
      * @param saved used to resume application
@@ -137,7 +141,7 @@ public class UserAccountActivity extends Activity {
                 R.drawable.ic_drawer,  /* nav drawer icon to replace Up caret */
                 R.string.drawer_open,  /* "open drawer" description */
                 R.string.drawer_close  /* "close drawer" description */
-                ) {
+        ) {
 
             /** Called when a drawer has settled in completely closed state. */
             public void onDrawerClosed(final View view) {
@@ -193,14 +197,14 @@ public class UserAccountActivity extends Activity {
         }
         
         findViewById(R.id.changepicture)
-                .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Intent i = new Intent(UserAccountActivity.this,
+            .setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    Intent i = new Intent(UserAccountActivity.this,
                         AddProfilePictureActivity.class);
-                startActivity(i);
-            }
-        });
+                    startActivity(i);
+                }
+            });
     }
     /**
      * updates the account list.
@@ -224,7 +228,7 @@ public class UserAccountActivity extends Activity {
         for (final ParseObject a : accountList) {
             Button accountButton = new Button(UserAccountActivity.this);
 
-            accountButton.setText("Account name: " + a.getString("displayName")
+            accountButton.setText("Account name: " + a.getString(displayName)
                     + "   Current Balance: "
                     + DecimalFormat.getCurrencyInstance()
                     .format(a.getDouble("currentBalance")));
@@ -234,7 +238,7 @@ public class UserAccountActivity extends Activity {
             accountButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(final View view) {
                     Button pressedButton = (Button) view;
-                    String passedAccount = a.getString("displayName");
+                    String passedAccount = a.getString(displayName);
                     Intent in = new Intent(UserAccountActivity.this,
                             FinancialAccountActivity.class);
                     in.putExtra("FinancialAccountName", passedAccount);
@@ -262,7 +266,7 @@ public class UserAccountActivity extends Activity {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
         if (drawerToggle.onOptionsItemSelected(item)) {
-          return true;
+            return true;
         }
         return true;
     }
@@ -281,11 +285,7 @@ public class UserAccountActivity extends Activity {
             final String item = (String) parent.getItemAtPosition(position);
 
             if (item.equals(logOutString)) {
-                user.logOut();
-                Toast.makeText(UserAccountActivity.this,
-                        "Successfully logged out!", Toast.LENGTH_LONG).show();
-                Intent in = new Intent(UserAccountActivity.this, Login.class);
-                startActivity(in);
+                logOut(view);
             } else if (item.equals(myAccountString)) {
                 Intent i = new Intent(UserAccountActivity.this,
                         UserAccountActivity.class);
@@ -320,8 +320,6 @@ public class UserAccountActivity extends Activity {
      * @param v calling view.
      */
     public final void logOut(final View v) {
-        Intent i = new Intent(UserAccountActivity.this, CreateAccount.class);
-        startActivity(i);
         user.logOut();
         Toast.makeText(UserAccountActivity.this,
                 "Successfully logged out!", Toast.LENGTH_LONG).show();

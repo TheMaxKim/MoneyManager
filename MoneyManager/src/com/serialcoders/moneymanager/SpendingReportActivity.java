@@ -35,10 +35,31 @@ import android.support.v4.app.NavUtils;
  * @author Steven
  */
 public class SpendingReportActivity extends Activity {
+	/**
+     * string used to store the name of the date EditText.
+     */
+    private String editText;
+	/**
+     * string used to represent the date the withdrawal was created at.
+     */
+    private String createdAt;
+	/**
+     * string used to represent the amount of the withdrawal.
+     */
+    private String amount;
+    /**
+     * string used to represent the name of the datePicker.
+     */
+    private String datePicker;
+	
+    /**
+     * date used to store the interval.
+     */
+    private Date dateFrom;
     /**
      * dates use to store the interval.
      */
-    private Date dateFrom, dateTo;
+    private Date dateTo;
     /**
      * used to edit the dates as needed.
      */
@@ -56,9 +77,14 @@ public class SpendingReportActivity extends Activity {
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT",
                 "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         user = ParseUser.getCurrentUser();
+        
         c = Calendar.getInstance();
         dateTo = new Date();
         dateFrom = new Date(0);
+        editText = getString(R.string.edit_text);
+        amount = getString(R.string.withdrawal_amount);
+        createdAt = getString(R.string.created_at);
+        datePicker = getString(R.string.date_picker);
 
         setUpListeners();
     }
@@ -71,9 +97,9 @@ public class SpendingReportActivity extends Activity {
             public void onClick(final View v) {
                 DialogFragment dateFragment = new DatePickerFragment();
                 Bundle bundle = new Bundle(1);
-                bundle.putInt("EditText", R.id.date_from);
+                bundle.putInt(editText, R.id.date_from);
                 dateFragment.setArguments(bundle);
-                dateFragment.show(getFragmentManager(), "datePicker");
+                dateFragment.show(getFragmentManager(), datePicker);
             }
         });
         dateFromText.addTextChangedListener(new TextWatcher() {
@@ -86,7 +112,6 @@ public class SpendingReportActivity extends Activity {
                     dateFrom = dateFormat.parse(v.toString());
                 } catch (java.text.ParseException e) {
                     dateFrom = new Date();
-                    Log.d("error1", e.getMessage());
                 }
                 findWithdrawals();
             }
@@ -108,9 +133,9 @@ public class SpendingReportActivity extends Activity {
             public void onClick(final View v) {
                 DialogFragment dateFragment = new DatePickerFragment();
                 Bundle bundle = new Bundle(1);
-                bundle.putInt("EditText", R.id.date_to);
+                bundle.putInt(editText, R.id.date_to);
                 dateFragment.setArguments(bundle);
-                dateFragment.show(getFragmentManager(), "datePicker");
+                dateFragment.show(getFragmentManager(), datePicker);
             }
         });
         dateToText.addTextChangedListener(new TextWatcher() {
@@ -151,9 +176,7 @@ public class SpendingReportActivity extends Activity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
         List<ParseObject> transactionList;
         query.whereEqualTo("userName", user.getUsername());
-        query.whereLessThan("amount", 0); //only get negative amounts
-        Log.d("tag3", dateFrom.toString());
-        Log.d("tag3", dateTo.toString());
+        query.whereLessThan(amount, 0); //only get negative amounts
 
           // adds a day because of lessThanOrEqualTo having issues
         Calendar cal = Calendar.getInstance();
@@ -161,8 +184,8 @@ public class SpendingReportActivity extends Activity {
         cal.add(Calendar.DATE, 1);
         dateTo = cal.getTime();
 
-        query.whereGreaterThanOrEqualTo("createdAt", dateFrom);
-        query.whereLessThanOrEqualTo("createdAt", dateTo);
+        query.whereGreaterThanOrEqualTo(createdAt, dateFrom);
+        query.whereLessThanOrEqualTo(createdAt, dateTo);
         try {
             transactionList = query.find();
         } catch (ParseException e) {
@@ -178,10 +201,10 @@ public class SpendingReportActivity extends Activity {
         for (ParseObject o : transactionList) {
             Button accountButton = new Button(this);
             Date transactionDate = o.getCreatedAt();
-            if (o.getDouble("amount") < 0) {
+            if (o.getDouble(amount) < 0) {
                 accountButton.setText(o.get("transactionType") + " "
                      + DecimalFormat.getCurrencyInstance()
-                     .format(-o.getDouble("amount")) + " from "
+                        .format(-o.getDouble(amount)) + " from "
                      + o.get("accountFullName") + "\n on "
                      + df.format(transactionDate));
                 accountButton.setBackgroundResource(R.drawable.red_button);
@@ -190,7 +213,7 @@ public class SpendingReportActivity extends Activity {
                     LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);
 
-            totalWithdrawals += o.getDouble("amount");
+            totalWithdrawals += o.getDouble(amount);
         }
 
         TextView balance = (TextView) findViewById(R.id.total_withdrawals);
@@ -200,15 +223,15 @@ public class SpendingReportActivity extends Activity {
     @Override
     public final boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
+            case android.R.id.home:
             // This ID represents the Home or Up button. In the case of this
             // activity, the Up button is shown. Use NavUtils to allow users
             // to navigate up one level in the application structure.
             //
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        default:
-            break;
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

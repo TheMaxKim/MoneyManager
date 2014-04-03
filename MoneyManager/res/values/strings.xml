@@ -60,5 +60,9 @@
     <string name="drawer_title">Menu</string>
     <string name="drawer_close">Close drawer</string>
     <string name="drawer_open">Open drawer</string>
+    <string name="edit_text">EditText</string>
+    <string name="withdrawal_amount">amount</string>
+    <string name="created_at">createdAt</string>
+    <string name="date_picker">datePicker</string>
 
 </resources>

@@ -17,20 +17,20 @@ package com.serialcoders.moneymanager;
   *
   * @author Steven
   */
- public class DatePickerFragment extends DialogFragment
+public class DatePickerFragment extends DialogFragment
                  implements DatePickerDialog.OnDateSetListener {
      /**
       * Calendar used to store date chosen by user.
       */
-     private static final Calendar CALENDAR = Calendar.getInstance();
+    private static final Calendar CALENDAR = Calendar.getInstance();
      /**
       * date the user has chosen.
       */
-     private static Date date;
+    private static Date date;
      /**
       * The editText which the user is writing to.
       */
-     private static EditText editText;
+    private static EditText editText;
 
      /**
       * Method called upon creation of the DatePickerFragment.
@@ -38,16 +38,16 @@ package com.serialcoders.moneymanager;
       * @param saved use to resume the app
       * @return a dialog for choosing the date
       */
-     public final Dialog onCreateDialog(final Bundle saved) {
-         editText = (EditText) getActivity().findViewById(getArguments()
+    public final Dialog onCreateDialog(final Bundle saved) {
+        editText = (EditText) getActivity().findViewById(getArguments()
                  .getInt("EditText"));
 
-         final int year = CALENDAR.get(Calendar.YEAR);
-         final int month = CALENDAR.get(Calendar.MONTH);
-         final int day = CALENDAR.get(Calendar.DAY_OF_MONTH);
+        final int year = CALENDAR.get(Calendar.YEAR);
+        final int month = CALENDAR.get(Calendar.MONTH);
+        final int day = CALENDAR.get(Calendar.DAY_OF_MONTH);
 
-         return new DatePickerDialog(getActivity(), this, year, month, day);
-     }
+        return new DatePickerDialog(getActivity(), this, year, month, day);
+    }
 
      /**
       *  Method called when the date is set by the user.
@@ -58,12 +58,12 @@ package com.serialcoders.moneymanager;
       *  @param month the month chosen
       *  @param day the day chosen
       */
-     public final void onDateSet(final DatePicker view, final int year,
+    public final void onDateSet(final DatePicker view, final int year,
              final int month, final int day) {
-         CALENDAR.set(year, month, day);
-         date = CALENDAR.getTime();
-         final DateFormat dateFormat = DateFormat
+        CALENDAR.set(year, month, day);
+        date = CALENDAR.getTime();
+        final DateFormat dateFormat = DateFormat
                  .getDateInstance(DateFormat.SHORT);
-         editText.setText(dateFormat.format(date));
-     }
- }
+        editText.setText(dateFormat.format(date));
+    }
+}
