@@ -191,7 +191,7 @@ public class UserAccountActivity extends Activity {
             }
 
         }
-
+        
         findViewById(R.id.changepicture)
                 .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,6 +312,23 @@ public class UserAccountActivity extends Activity {
         Intent i = new Intent(UserAccountActivity.this, CreateAccount.class);
         startActivity(i);
     }
+    
+    
+    /**
+     * log the user out to main screen.
+     *
+     * @param v calling view.
+     */
+    public final void logOut(final View v) {
+        Intent i = new Intent(UserAccountActivity.this, CreateAccount.class);
+        startActivity(i);
+        user.logOut();
+        Toast.makeText(UserAccountActivity.this,
+                "Successfully logged out!", Toast.LENGTH_LONG).show();
+        Intent in = new Intent(UserAccountActivity.this, Login.class);
+        startActivity(in);
+    }
+    
 
     /**
      * Launchers the RemoveAccount ativity.

@@ -67,7 +67,8 @@
         	android:drawablePadding="2dip"
         	android:paddingLeft="15dip"
         	android:paddingRight="15dip"
-        	android:text="@string/remove_account" />
+        	android:onClick="logOut"
+        	android:text="logout" />
 
     	<View
         	android:id="@+id/view3"
