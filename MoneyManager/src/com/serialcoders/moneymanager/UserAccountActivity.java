@@ -83,6 +83,10 @@ public class UserAccountActivity extends Activity {
      */
     private String spendingReportString = "Spending Report";
     /**
+     * transaction report string.
+     */
+    private String transactionReportString = "Transaction Report";
+    /**
      * transaction map string.
      */
     private String transactionMapString = "Transaction Map";
@@ -129,8 +133,10 @@ public class UserAccountActivity extends Activity {
         drawerItems = new ArrayList<String>();
         drawerItems.add(myAccountString);
         drawerItems.add(spendingReportString);
+        drawerItems.add(transactionReportString);
         drawerItems.add(transactionMapString);
         drawerItems.add(logOutString);
+        
         adapter = new ArrayAdapter(this,
                 R.layout.draw_list_layout, drawerItems);
         drawerList.setAdapter(adapter);
@@ -293,6 +299,10 @@ public class UserAccountActivity extends Activity {
             } else if (item.equals(spendingReportString)) {
                 Intent i = new Intent(UserAccountActivity.this,
                         SpendingReportActivity.class);
+                startActivity(i);
+            } else if (item.equals(transactionReportString)) {
+            	Intent i = new Intent(UserAccountActivity.this,
+                    TransactionReportActivity.class);
                 startActivity(i);
             } else if (item.equals(transactionMapString)) {
                 Intent i = new Intent(UserAccountActivity.this,
