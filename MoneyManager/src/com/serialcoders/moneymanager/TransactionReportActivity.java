@@ -211,7 +211,7 @@ public class TransactionReportActivity extends Activity {
             } else {
                 accountButton.setText(o.get("transactionType") + " "
                      + DecimalFormat.getCurrencyInstance()
-                        .format(-o.getDouble(amount)) + " from "
+                        .format(-o.getDouble(amount)) + " to "
                      + o.get("accountFullName") + "\n on "
                      + df.format(transactionDate));
                 accountButton.setBackgroundResource(R.drawable.green_button);
@@ -224,7 +224,7 @@ public class TransactionReportActivity extends Activity {
         }
 
         TextView balance = (TextView) findViewById(R.id.total_withdrawals);
-        balance.setText("Withdrawals: $" + totalWithdrawals);
+        balance.setText("Total: $" + totalWithdrawals);
     }
 
 	@Override
