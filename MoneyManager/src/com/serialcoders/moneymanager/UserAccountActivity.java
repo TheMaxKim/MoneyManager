@@ -6,6 +6,9 @@ import java.util.List;
 
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -29,6 +32,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.serialcoders.moneymanager.ActionButton.ActionButtonCallback;
+
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 
@@ -37,7 +42,7 @@ import android.support.v4.widget.DrawerLayout;
  *
  * @author Steven
  */
-public class UserAccountActivity extends Activity {
+public class UserAccountActivity extends Activity implements ActionButtonCallback {
     /**
      * The currently logged in user.
      */
@@ -232,25 +237,12 @@ public class UserAccountActivity extends Activity {
                 LayoutParams.WRAP_CONTENT);
         ll.removeAllViews();
         for (final ParseObject a : accountList) {
-            Button accountButton = new Button(UserAccountActivity.this);
+            AccountButton accountButton = new AccountButton(UserAccountActivity.this);
+            accountButton.setAccount(a.getString(displayName));
+            accountButton.setBalance(a.getDouble("currentBalance"));
+            accountButton.setAccountFullName(a.getString("fullName"));
 
-            accountButton.setText("Account name: " + a.getString(displayName)
-                    + "   Current Balance: "
-                    + DecimalFormat.getCurrencyInstance()
-                    .format(a.getDouble("currentBalance")));
-            accountButton.setBackgroundResource(R.drawable.green_button);
             ll.addView(accountButton, lp);
-
-            accountButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(final View view) {
-                    Button pressedButton = (Button) view;
-                    String passedAccount = a.getString(displayName);
-                    Intent in = new Intent(UserAccountActivity.this,
-                            FinancialAccountActivity.class);
-                    in.putExtra("FinancialAccountName", passedAccount);
-                    startActivity(in);
-                }
-            });
         }
     }
 
@@ -346,6 +338,10 @@ public class UserAccountActivity extends Activity {
     public void removeAccount(final View v) {
         //TODO Add remove account functionality for button
     }
+	@Override
+	public void refresh() {
+		findAccounts();
+	}
 
 
 }

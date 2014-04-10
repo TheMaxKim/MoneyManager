@@ -13,6 +13,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.serialcoders.moneymanager.ActionButton.ActionButtonCallback;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -34,7 +35,7 @@ import android.support.v4.app.NavUtils;
  *
  * @author Steven
  */
-public class SpendingReportActivity extends Activity {
+public class SpendingReportActivity extends Activity implements ActionButtonCallback {
 	/**
      * string used to store the name of the date EditText.
      */
@@ -199,16 +200,7 @@ public class SpendingReportActivity extends Activity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.withdrawal_list);
         ll.removeAllViews();
         for (ParseObject o : transactionList) {
-            Button accountButton = new Button(this);
-            Date transactionDate = o.getCreatedAt();
-            if (o.getDouble(amount) < 0) {
-                accountButton.setText(o.get("transactionType") + " "
-                     + DecimalFormat.getCurrencyInstance()
-                        .format(-o.getDouble(amount)) + " from "
-                     + o.get("accountFullName") + "\n on "
-                     + df.format(transactionDate));
-                accountButton.setBackgroundResource(R.drawable.red_button);
-            }
+        	TransactionButton accountButton = new TransactionButton(this, o);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);
@@ -235,5 +227,10 @@ public class SpendingReportActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+	@Override
+	public void refresh() {
+		findWithdrawals();
+		
+	}
 
 }

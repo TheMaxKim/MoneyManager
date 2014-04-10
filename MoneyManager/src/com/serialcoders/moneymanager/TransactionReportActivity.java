@@ -13,6 +13,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.serialcoders.moneymanager.ActionButton.ActionButtonCallback;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -35,7 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
 
-public class TransactionReportActivity extends Activity {
+public class TransactionReportActivity extends Activity implements ActionButtonCallback {
 	/**
      * string used to store the name of the date EditText.
      */
@@ -199,23 +200,7 @@ public class TransactionReportActivity extends Activity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.withdrawal_list);
         ll.removeAllViews();
         for (ParseObject o : transactionList) {
-            Button accountButton = new Button(this);
-            Date transactionDate = o.getCreatedAt();
-            if (o.getDouble(amount) < 0) {
-                accountButton.setText(o.get("transactionType") + " "
-                     + DecimalFormat.getCurrencyInstance()
-                        .format(-o.getDouble(amount)) + " from "
-                     + o.get("accountFullName") + "\n on "
-                     + df.format(transactionDate));
-                accountButton.setBackgroundResource(R.drawable.red_button);
-            } else {
-                accountButton.setText(o.get("transactionType") + " "
-                     + DecimalFormat.getCurrencyInstance()
-                        .format(-o.getDouble(amount)) + " to "
-                     + o.get("accountFullName") + "\n on "
-                     + df.format(transactionDate));
-                accountButton.setBackgroundResource(R.drawable.green_button);
-            }
+            TransactionButton accountButton = new TransactionButton(this, o);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT);
             ll.addView(accountButton, lp);
@@ -237,5 +222,10 @@ public class TransactionReportActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	public void refresh() {
+		findWithdrawals();
+		
 	}
 }
