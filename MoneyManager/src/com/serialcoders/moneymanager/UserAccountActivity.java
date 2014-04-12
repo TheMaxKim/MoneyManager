@@ -285,9 +285,7 @@ public class UserAccountActivity extends Activity implements ActionButtonCallbac
             if (item.equals(logOutString)) {
                 logOut(view);
             } else if (item.equals(myAccountString)) {
-                Intent i = new Intent(UserAccountActivity.this,
-                        UserAccountActivity.class);
-                startActivity(i);
+            	drawerLayout.closeDrawer(drawerList);
             } else if (item.equals(spendingReportString)) {
                 Intent i = new Intent(UserAccountActivity.this,
                         SpendingReportActivity.class);
