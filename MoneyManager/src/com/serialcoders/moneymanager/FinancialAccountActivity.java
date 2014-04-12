@@ -51,6 +51,7 @@ public class FinancialAccountActivity extends SliderMenuActivity implements Acti
      * @param financialAccountNameExtra The name of the extra passed in as the name of the selected financial account.
      */
     String financialAccountNameExtra = "FinancialAccountName";
+    Double initialBalance;
     ParseUser user;
     
     @Override
@@ -72,8 +73,12 @@ public class FinancialAccountActivity extends SliderMenuActivity implements Acti
         
         user = ParseUser.getCurrentUser();
         refresh();
+        
+        TextView textViewInitialBalance = (TextView) findViewById(R.id.initialbalance);
+        
+        textViewInitialBalance.setText("Initial Balance: " + DecimalFormat.getCurrencyInstance().format(initialBalance));
  
-        }
+   }
         
 
     @Override
@@ -115,7 +120,8 @@ public class FinancialAccountActivity extends SliderMenuActivity implements Acti
             Toast.makeText(this, "Cannot load account information: " + e, Toast.LENGTH_LONG).show();
         }
         Log.d("size", ""+accountList.size());
-        accountCurrentBalance = 0.0;
+        accountCurrentBalance = accountList.get(0).getDouble("currentBalance");
+        initialBalance = accountList.get(0).getDouble("initialBalance");
             
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
         List<ParseObject> transactionList;
@@ -156,7 +162,7 @@ public class FinancialAccountActivity extends SliderMenuActivity implements Acti
                     Button pressedButton = (Button) view;
                 }
             });*/
-        	accountCurrentBalance += a.getDouble("amount");
+        	//accountCurrentBalance += a.getDouble("amount");
         	ActionButton transactionButton = new TransactionButton(this, a);
             ll.addView(transactionButton, lp);
 		
