@@ -19,9 +19,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ActionBar.LayoutParams;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +37,7 @@ import android.support.v4.app.NavUtils;
  *
  * @author Steven
  */
-public class SpendingReportActivity extends Activity implements ActionButtonCallback {
+public class SpendingReportActivity extends SliderMenuActivity implements ActionButtonCallback {
 	/**
      * string used to store the name of the date EditText.
      */
@@ -73,7 +75,11 @@ public class SpendingReportActivity extends Activity implements ActionButtonCall
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spending_report);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_spending_report, null, false);
+        drawerLayout.addView(contentView, 0);
+        //setContentView(R.layout.activity_spending_report);
 
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT",
                 "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");

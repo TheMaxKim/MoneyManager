@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ import android.location.LocationManager;
  * @author Tsz 
  *
  */
-public class TransactionActivity extends Activity implements LocationListener {
+public class TransactionActivity extends SliderMenuActivity implements LocationListener {
 	/**
      * @param amount transaction amount
      */	
@@ -80,7 +81,11 @@ public class TransactionActivity extends Activity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_transaction, null, false);
+        drawerLayout.addView(contentView, 0);
+        //setContentView(R.layout.activity_transaction);
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         
         Intent intent = getIntent();

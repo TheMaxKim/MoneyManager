@@ -20,6 +20,7 @@ import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ActionBar.LayoutParams;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,7 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
 
-public class TransactionReportActivity extends Activity implements ActionButtonCallback {
+public class TransactionReportActivity extends SliderMenuActivity implements ActionButtonCallback {
 	/**
      * string used to store the name of the date EditText.
      */
@@ -74,7 +75,11 @@ public class TransactionReportActivity extends Activity implements ActionButtonC
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_report);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_transaction_report, null, false);
+        drawerLayout.addView(contentView, 0);
+        //setContentView(R.layout.activity_transaction_report);
 
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT",
                 "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
