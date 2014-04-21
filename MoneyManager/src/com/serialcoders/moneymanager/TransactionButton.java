@@ -11,6 +11,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.serialcoders.moneymanager.ActionButton.ActionButtonCallback;
 
 import android.app.AlertDialog;
@@ -77,6 +78,22 @@ public class TransactionButton extends ActionButton {
 							public void done(ParseObject object,
 									ParseException e) {
 								if (object != null) {
+									ParseUser user = ParseUser.getCurrentUser();
+							        ParseQuery<ParseObject> accountQuery = ParseQuery.getQuery("Account");
+							        accountQuery.whereEqualTo("username", user.getUsername());
+							        accountQuery.whereEqualTo("displayName", object.getString("accountFullName"));
+							        try {
+							            ParseObject account = accountQuery.find().get(0);
+							            double current = account.getDouble("currentBalance");
+							            double amount =  object.getDouble("amount");
+							            double balance = current - amount;
+							            account.put("currentBalance", balance);
+							            Log.d("89", " " + current +" - " +amount + " = " +balance);
+							            account.saveInBackground();
+							        } catch (ParseException e2) {
+							            Toast.makeText(getContext(), "Cannot load account information: " + e2, Toast.LENGTH_LONG).show();
+							        }  
+							        
 									object.deleteInBackground(new DeleteCallback() {
 
 										@Override
