@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background = "@drawable/background"
     tools:context=".Login" >
 
     <EditText
@@ -13,6 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
+        android:hint ="@string/username"
+        android:textColor = "#FFFFFF"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="text" >
@@ -25,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
+        android:textColor = "#FFFFFF"
         android:layout_below="@+id/username"
         android:text="@string/password" />
 
@@ -35,6 +39,8 @@
         android:layout_alignLeft="@+id/TextView2"
         android:layout_alignRight="@+id/username"
         android:layout_below="@+id/TextView2"
+        android:hint ="@string/password"
+        android:textColor = "#FFFFFF"
         android:ems="10"
         android:inputType="textPassword" />
 
@@ -44,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
         android:layout_alignParentTop="true"
+        android:textColor = "#FFFFFF"
         android:layout_marginTop="101dp"
         android:text="@string/username" />
 
@@ -65,6 +72,7 @@
         android:layout_alignBottom="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="52dp"
+        android:textColor = "#FFFFFF"
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
