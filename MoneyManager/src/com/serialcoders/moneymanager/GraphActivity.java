@@ -1,12 +1,15 @@
 package com.serialcoders.moneymanager;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.LegendAlign;
 import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
@@ -85,15 +88,38 @@ public class GraphActivity extends Activity {
 	        	Log.d("here", "kjblkj");
 	            balance += o.getDouble("amount");
 	            cal.setTime(o.getCreatedAt());
-	            dataList.add(new GraphViewData(cal.get(Calendar.DAY_OF_YEAR), balance));
+	            double time = cal.get(Calendar.DAY_OF_YEAR) + cal.get(Calendar.HOUR_OF_DAY)/24
+	            		+ cal.get(Calendar.MINUTE)/60
+	            		+ cal.get(Calendar.SECOND)/60;
+	            dataList.add(new GraphViewData(time, balance));
 	        }
 	        GraphViewDataInterface[] data = dataList.toArray(new GraphViewData[0]);
 	        Log.d("data0", data[0].getY()+"");
 			float[] color = {i * 50, 255, 255};
-			GraphViewSeries balanceSeries = new GraphViewSeries(accounts[i],
+			GraphViewSeries balanceSeries = new GraphViewSeries(account.getString("displayName"),
 					new GraphViewSeriesStyle(Color.HSVToColor(color), 3), data);
 			
 			graphView.addSeries(balanceSeries);
+			
 		}
+        graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
+        	  @Override
+        	  public String formatLabel(double value, boolean isValueX) {
+        	    if (isValueX) {
+        	    	Calendar cal = Calendar.getInstance();
+        	    	cal.set(Calendar.DAY_OF_YEAR, (int) value);
+        	    	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        	    	return sdf.format(cal.getTime());
+        	    }
+        	    return DecimalFormat.getCurrencyInstance().format(value);
+        	  }
+        	});
+        graphView.setScrollable(true);
+        graphView.setScalable(true);
+        graphView.setShowLegend(true);
+        graphView.setLegendAlign(LegendAlign.BOTTOM);
+        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
+        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
+        //graphView.getGraphViewStyle().setNumHorizontalLabels(3);
 	}
 }
