@@ -67,5 +67,6 @@
     <string name="title_activity_transaction_report">TransactionReport</string>
     <string name="title_activity_graph">GraphActivity</string>
     <string name="title_activity_graph_select">GraphSelectActivity</string>
+    <string name="generate_graph">Generate Graph</string>
 
 </resources>
