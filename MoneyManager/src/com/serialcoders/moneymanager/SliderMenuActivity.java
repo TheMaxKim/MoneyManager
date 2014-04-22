@@ -66,6 +66,7 @@ public class SliderMenuActivity extends FragmentActivity{
     /**
      * display name string.
      */
+    private String graphString = "Account Graph";
     
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class SliderMenuActivity extends FragmentActivity{
         drawerItems.add(transactionReportString);
         drawerItems.add(transactionMapString);
         drawerItems.add(logOutString);
+        drawerItems.add(graphString);
         
         adapter = new ArrayAdapter(this,
                 R.layout.draw_list_layout, drawerItems);
@@ -179,6 +181,10 @@ public class SliderMenuActivity extends FragmentActivity{
             } else if (item.equals(transactionMapString)) {
                 Intent i = new Intent(SliderMenuActivity.this,
                         TransactionMapActivity.class);
+                startActivity(i);
+            } else if (item.equals(graphString)) {
+                Intent i = new Intent(SliderMenuActivity.this,
+                        GraphActivity.class);
                 startActivity(i);
             }
 

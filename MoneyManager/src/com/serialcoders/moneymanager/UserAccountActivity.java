@@ -8,12 +8,14 @@ import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,7 +44,7 @@ import android.support.v4.widget.DrawerLayout;
  *
  * @author Steven
  */
-public class UserAccountActivity extends Activity implements ActionButtonCallback {
+public class UserAccountActivity extends SliderMenuActivity implements ActionButtonCallback {
     /**
      * The currently logged in user.
      */
@@ -56,46 +58,6 @@ public class UserAccountActivity extends Activity implements ActionButtonCallbac
      */
     private ImageView profilePictureView;
     /**
-     * layout of the slider drawer.
-     */
-    private DrawerLayout drawerLayout;
-    /**
-     * used to display drawer list.
-     */
-    private ListView drawerList;
-    /**
-     * toggle to open drawer.
-     */
-    private ActionBarDrawerToggle drawerToggle;
-    /**
-     * list of items in drawer.
-     */
-    private ArrayList<String> drawerItems;
-    /**
-     * used to show items in drawer.
-     */
-    private ArrayAdapter adapter;
-    /**
-     * log out string.
-     */
-    private String logOutString = "Log Out";
-    /**
-     * my accounts string.
-     */
-    private String myAccountString = "My Accounts";
-    /**
-     * spending report string.
-     */
-    private String spendingReportString = "Spending Report";
-    /**
-     * transaction report string.
-     */
-    private String transactionReportString = "Transaction Report";
-    /**
-     * transaction map string.
-     */
-    private String transactionMapString = "Transaction Map";
-    /**
      * display name string.
      */
     private String displayName = "displayName";
@@ -106,10 +68,14 @@ public class UserAccountActivity extends Activity implements ActionButtonCallbac
      */
     protected final void onCreate(final Bundle saved) {
         super.onCreate(saved);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_useraccount, null, false);
+        drawerLayout.addView(contentView, 0); 
 
         ScrollView sv = new ScrollView(this);
-        setContentView(R.layout.activity_useraccount);
-
+        //setContentView(R.layout.activity_useraccount);
+        
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT",
                 "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
         user = ParseUser.getCurrentUser();
@@ -117,7 +83,6 @@ public class UserAccountActivity extends Activity implements ActionButtonCallbac
         displayWelcome();
         updateProfilePicture();
         findAccounts();
-        createDrawer();
     }
     /**
      * called when the activity resumes.
@@ -127,55 +92,7 @@ public class UserAccountActivity extends Activity implements ActionButtonCallbac
 
         findAccounts();
     }
-    /**
-     * creates the slider drawer.
-     */
-    private void createDrawer() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Populate list with options
-        drawerItems = new ArrayList<String>();
-        drawerItems.add(myAccountString);
-        drawerItems.add(spendingReportString);
-        drawerItems.add(transactionReportString);
-        drawerItems.add(transactionMapString);
-        drawerItems.add(logOutString);
-        
-        adapter = new ArrayAdapter(this,
-                R.layout.draw_list_layout, drawerItems);
-        drawerList.setAdapter(adapter);
-
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace Up caret */
-                R.string.drawer_open,  /* "open drawer" description */
-                R.string.drawer_close  /* "close drawer" description */
-        ) {
-
-            /** Called when a drawer has settled in completely closed state. */
-            public void onDrawerClosed(final View view) {
-                super.onDrawerClosed(view);
-                getActionBar().setTitle(R.string.title_activity_drawer);
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(final View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(R.string.drawer_title);
-            }
-        };
-
-        drawerLayout.setDrawerListener(drawerToggle);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayShowTitleEnabled(false);
-
-        // Set the list's click listener
-        drawerList.setOnItemClickListener(new DrawerItemClickListener());
-    }
+    
     /**
      * displays the welcome text.
      */
@@ -246,63 +163,6 @@ public class UserAccountActivity extends Activity implements ActionButtonCallbac
         }
     }
 
-    @Override
-    protected final void onPostCreate(final Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public final void onConfigurationChanged(final Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public final boolean onOptionsItemSelected(final MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return true;
-    }
-    /**
-     * handles events in the drawer.
-     *
-     * @author Ethan
-     */
-    private class DrawerItemClickListener
-            implements ListView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(final AdapterView<?> parent, final View view,
-                final int position, final long id) {
-
-            final String item = (String) parent.getItemAtPosition(position);
-
-            if (item.equals(logOutString)) {
-                logOut(view);
-            } else if (item.equals(myAccountString)) {
-            	drawerLayout.closeDrawer(drawerList);
-            } else if (item.equals(spendingReportString)) {
-                Intent i = new Intent(UserAccountActivity.this,
-                        SpendingReportActivity.class);
-                startActivity(i);
-            } else if (item.equals(transactionReportString)) {
-            	Intent i = new Intent(UserAccountActivity.this,
-                    TransactionReportActivity.class);
-                startActivity(i);
-            } else if (item.equals(transactionMapString)) {
-                Intent i = new Intent(UserAccountActivity.this,
-                        TransactionMapActivity.class);
-                startActivity(i);
-            }
-
-            drawerLayout.closeDrawer(drawerList);
-        }
-    }
     /**
      * launches the CreateAccount Activity.
      *

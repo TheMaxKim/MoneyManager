@@ -125,6 +125,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.serialcoders.moneymanager.UserAccountActivity" />
         </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.GraphActivity"
+            android:label="@string/title_activity_graph" >
+        </activity>
     </application>
 
 </manifest>

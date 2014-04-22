@@ -65,5 +65,6 @@
     <string name="created_at">createdAt</string>
     <string name="date_picker">datePicker</string>
     <string name="title_activity_transaction_report">TransactionReport</string>
+    <string name="title_activity_graph">GraphActivity</string>
 
 </resources>
