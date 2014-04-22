@@ -79,7 +79,7 @@ public class GraphSelectActivity extends Activity implements OnClickListener {
             checkBox.setContentDescription(a.getObjectId());
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT,
-                    LayoutParams.MATCH_PARENT, 1.0f);
+                    LayoutParams.WRAP_CONTENT, 1.0f);
             accountButton.setLayoutParams(param);
             checkBox.setLayoutParams(param);
             
