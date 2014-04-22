@@ -18,6 +18,7 @@ import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.os.Build;
 
@@ -77,14 +79,26 @@ public class GraphSelectActivity extends Activity implements OnClickListener {
             CheckBox checkBox = new CheckBox(GraphSelectActivity.this);
             checkBox.setOnClickListener(this);
             checkBox.setContentDescription(a.getObjectId());
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT, 1.0f);
-            accountButton.setLayoutParams(param);
-            checkBox.setLayoutParams(param);
+            RelativeLayout.LayoutParams left = new RelativeLayout.LayoutParams(
+            		LayoutParams.WRAP_CONTENT,
+            		LayoutParams.WRAP_CONTENT);
+            left.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            RelativeLayout.LayoutParams right = new RelativeLayout.LayoutParams(
+            		LayoutParams.WRAP_CONTENT,
+            		LayoutParams.WRAP_CONTENT);
+            right.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+//                    LayoutParams.MATCH_PARENT,
+//                    LayoutParams.WRAP_CONTENT, 1.0f);
+            accountButton.setLayoutParams(left);
+            checkBox.setLayoutParams(right);
+            //accountButton.setLayoutParams(param);
+            //checkBox.setLayoutParams(param);
+            //checkBox.setGravity(Gravity.RIGHT);
             
-            LinearLayout horizontal = new LinearLayout(GraphSelectActivity.this);
-			horizontal.setOrientation(LinearLayout.HORIZONTAL);
+            RelativeLayout horizontal = new RelativeLayout(GraphSelectActivity.this);
+			//horizontal.setOrientation(LinearLayout.HORIZONTAL);
+			//horizontal.setLayoutParams(param);
 			horizontal.addView(accountButton);
 			horizontal.addView(checkBox);
             ll.addView(horizontal, lp);
