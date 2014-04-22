@@ -185,6 +185,7 @@ public class SliderMenuActivity extends FragmentActivity{
             } else if (item.equals(graphString)) {
                 Intent i = new Intent(SliderMenuActivity.this,
                         GraphActivity.class);
+                i.putExtra("accountName", "bb"); //TODO change
                 startActivity(i);
             }
 
