@@ -87,23 +87,24 @@ public class GraphActivity extends Activity {
 	        cal.setTime(account.getCreatedAt());
 	        startDay = cal.get(Calendar.DAY_OF_YEAR)
 	        		+ cal.get(Calendar.HOUR_OF_DAY)/24
-            		+ cal.get(Calendar.MINUTE)/60
-            		+ cal.get(Calendar.SECOND)/60;
+            		+ cal.get(Calendar.MINUTE)/(60*24)
+            		+ cal.get(Calendar.SECOND)/(60*60*24);
 	        dataList.add(new GraphViewData(startDay, balance));
 	        for (ParseObject o : transactionList) {
 	        	Log.d("here", "kjblkj");
 	            balance += o.getDouble("amount");
 	            cal.setTime(o.getCreatedAt());
-	            double time = cal.get(Calendar.DAY_OF_YEAR) + cal.get(Calendar.HOUR_OF_DAY)/24
-	            		+ cal.get(Calendar.MINUTE)/60
-	            		+ cal.get(Calendar.SECOND)/60;
+	            double time = cal.get(Calendar.DAY_OF_YEAR)
+		        		+ cal.get(Calendar.HOUR_OF_DAY)/24
+	            		+ cal.get(Calendar.MINUTE)/(60*24)
+	            		+ cal.get(Calendar.SECOND)/(60*60*24);
 	            dataList.add(new GraphViewData(time, balance));
 	        }
 	        cal = Calendar.getInstance();
 	        today = cal.get(Calendar.DAY_OF_YEAR)
 	        		+ cal.get(Calendar.HOUR_OF_DAY)/24
-            		+ cal.get(Calendar.MINUTE)/60
-            		+ cal.get(Calendar.SECOND)/60;
+            		+ cal.get(Calendar.MINUTE)/(60*24)
+            		+ cal.get(Calendar.SECOND)/(60*60*24);
 	        dataList.add(new GraphViewData(today, balance));
 	        GraphViewDataInterface[] data = dataList.toArray(new GraphViewData[0]);
 	        Log.d("data0", data[0].getY()+"");
@@ -126,7 +127,7 @@ public class GraphActivity extends Activity {
         	    return DecimalFormat.getCurrencyInstance().format(value);
         	  }
         	});
-        graphView.setViewPort(startDay, today - startDay);
+        graphView.setViewPort(startDay, today - startDay + 1);
         graphView.setScrollable(true);
         graphView.setScalable(true);
         graphView.setShowLegend(true);
