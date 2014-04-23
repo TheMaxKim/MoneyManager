@@ -16,6 +16,8 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -76,6 +78,16 @@ public class GraphSelectActivity extends Activity implements OnClickListener {
                     + "   Current Balance: "
                     + DecimalFormat.getCurrencyInstance()
                     .format(a.getDouble("currentBalance")));
+            int[] attrs = new int[] { android.R.attr.selectableItemBackground /* index 0 */};
+            TypedArray ta = obtainStyledAttributes(attrs);
+            Drawable drawableFromTheme = ta.getDrawable(0);
+            ta.recycle();
+            if (Build.VERSION.SDK_INT >= 16 ) {
+            	accountButton.setBackground(drawableFromTheme);
+            } else {
+            	accountButton.setBackgroundDrawable(drawableFromTheme);
+            }
+            
             CheckBox checkBox = new CheckBox(GraphSelectActivity.this);
             checkBox.setOnClickListener(this);
             checkBox.setContentDescription(a.getObjectId());
@@ -91,6 +103,7 @@ public class GraphSelectActivity extends Activity implements OnClickListener {
 //                    LayoutParams.MATCH_PARENT,
 //                    LayoutParams.WRAP_CONTENT, 1.0f);
             accountButton.setLayoutParams(left);
+            accountButton.setPadding(0, 0, 40, 0);
             checkBox.setLayoutParams(right);
             //accountButton.setLayoutParams(param);
             //checkBox.setLayoutParams(param);
@@ -99,6 +112,10 @@ public class GraphSelectActivity extends Activity implements OnClickListener {
             RelativeLayout horizontal = new RelativeLayout(GraphSelectActivity.this);
 			//horizontal.setOrientation(LinearLayout.HORIZONTAL);
 			//horizontal.setLayoutParams(param);
+            RelativeLayout.LayoutParams horizParam = new RelativeLayout.LayoutParams(
+            		LayoutParams.MATCH_PARENT,
+            		LayoutParams.WRAP_CONTENT);
+            horizontal.setLayoutParams(horizParam);
 			horizontal.addView(accountButton);
 			horizontal.addView(checkBox);
             ll.addView(horizontal, lp);

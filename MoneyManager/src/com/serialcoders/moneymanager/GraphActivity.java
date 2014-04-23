@@ -60,6 +60,8 @@ public class GraphActivity extends Activity {
 
 		ParseQuery<ParseObject> accountQuery = ParseQuery.getQuery("Account");
         ParseObject account;
+        double startDay = 0;
+        double today = 0;
         for (int i = 0; i < accounts.length; i++) {
 	        try {
 	            account = accountQuery.get(accounts[i]);
@@ -68,7 +70,6 @@ public class GraphActivity extends Activity {
 	            Toast.makeText(this, "Cannot load account information: " + e, Toast.LENGTH_LONG).show();
 	        }
 	        double balance = account.getDouble("initialBalance");
-	        cal.setTime(account.getCreatedAt());
 			
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("Transaction");
 	        List<ParseObject> transactionList;
@@ -83,7 +84,12 @@ public class GraphActivity extends Activity {
 	        }
 	
 	        List<GraphViewData> dataList = new ArrayList<GraphViewData>();
-	        dataList.add(new GraphViewData(cal.get(Calendar.DAY_OF_YEAR), balance));
+	        cal.setTime(account.getCreatedAt());
+	        startDay = cal.get(Calendar.DAY_OF_YEAR)
+	        		+ cal.get(Calendar.HOUR_OF_DAY)/24
+            		+ cal.get(Calendar.MINUTE)/60
+            		+ cal.get(Calendar.SECOND)/60;
+	        dataList.add(new GraphViewData(startDay, balance));
 	        for (ParseObject o : transactionList) {
 	        	Log.d("here", "kjblkj");
 	            balance += o.getDouble("amount");
@@ -93,6 +99,12 @@ public class GraphActivity extends Activity {
 	            		+ cal.get(Calendar.SECOND)/60;
 	            dataList.add(new GraphViewData(time, balance));
 	        }
+	        cal = Calendar.getInstance();
+	        today = cal.get(Calendar.DAY_OF_YEAR)
+	        		+ cal.get(Calendar.HOUR_OF_DAY)/24
+            		+ cal.get(Calendar.MINUTE)/60
+            		+ cal.get(Calendar.SECOND)/60;
+	        dataList.add(new GraphViewData(today, balance));
 	        GraphViewDataInterface[] data = dataList.toArray(new GraphViewData[0]);
 	        Log.d("data0", data[0].getY()+"");
 			float[] color = {i * 50, 255, 255};
@@ -114,6 +126,7 @@ public class GraphActivity extends Activity {
         	    return DecimalFormat.getCurrencyInstance().format(value);
         	  }
         	});
+        graphView.setViewPort(startDay, today - startDay);
         graphView.setScrollable(true);
         graphView.setScalable(true);
         graphView.setShowLegend(true);
