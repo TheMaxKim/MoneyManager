@@ -40,6 +40,7 @@ public class Login extends Activity {
      * @param buttonRegister The register button for the login screen to make a new account.
      */
     private Button buttonRegister;
+    private Button forgotPassword;
     
     MediaPlayer mp;
     
@@ -57,8 +58,20 @@ public class Login extends Activity {
         passwordView = (EditText) findViewById(R.id.password);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        forgotPassword = (Button) findViewById(R.id.forgotpassword);
         
         mp = MediaPlayer.create(this, R.raw.button_click);
+        
+        
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	           	
+                Intent in = new Intent(Login.this, ResetPasswordActivity.class);
+                startActivity(in);
+            }
+        });
+        
         
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

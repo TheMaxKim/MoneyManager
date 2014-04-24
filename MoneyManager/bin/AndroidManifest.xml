@@ -52,6 +52,10 @@
             android:theme="@android:style/Theme.Black.NoTitleBar">
         </activity>
         <activity
+            android:name="com.serialcoders.moneymanager.ResetPasswordActivity"           
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity
             android:name="com.serialcoders.moneymanager.RegisterUser"
             android:label="@string/title_activity_register_user"
             android:theme="@android:style/Theme.Black.NoTitleBar" >

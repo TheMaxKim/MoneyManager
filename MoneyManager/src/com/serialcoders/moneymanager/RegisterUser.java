@@ -26,6 +26,7 @@ public class RegisterUser extends Activity {
 	 * @param usernameView The textbox for the username to be entered.
 	 */
     private EditText usernameView;
+    private EditText emailView;
     /**
      * @param passwordView The textbox for the password to be entered.
      */
@@ -42,6 +43,7 @@ public class RegisterUser extends Activity {
      * @param password The user provided password for the new account.
      */
     private String password;
+    private String email;
     /**
      * @param loadingMessage The loading message to use during login and signup.
      */
@@ -59,7 +61,7 @@ public class RegisterUser extends Activity {
         usernameView = (EditText) findViewById(R.id.registerName);
         passwordView = (EditText) findViewById(R.id.registerPassword);
         confirmPasswordView = (EditText) findViewById(R.id.confirmPassword);
-        
+        emailView = (EditText) findViewById(R.id.email);
         mp = MediaPlayer.create(this,R.raw.button_click);
         
         findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
@@ -86,6 +88,13 @@ public class RegisterUser extends Activity {
                     }
                     validationError = true;
                     validationErrorMessage.append(getResources().getString(R.string.error_blank_password));
+                }
+                if (isEmpty(emailView)) {
+                    if (validationError) {
+                        validationErrorMessage.append(joinMessage);
+                    }
+                    validationError = true;
+                    validationErrorMessage.append(getResources().getString(R.string.error_blank_email));
                 }
                 if (!isMatching(passwordView, confirmPasswordView)) {
                     if (validationError) {
@@ -116,6 +125,8 @@ public class RegisterUser extends Activity {
                 user.setUsername(username);
                 password = passwordView.getText().toString();
                 user.setPassword(password);
+                email = emailView.getText().toString();
+                user.setEmail(email);
                 user.saveInBackground();
                 
                 // Call the Parse signup method

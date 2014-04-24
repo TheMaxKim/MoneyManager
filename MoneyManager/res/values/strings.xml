@@ -68,5 +68,7 @@
     <string name="title_activity_graph">GraphActivity</string>
     <string name="title_activity_graph_select">GraphSelectActivity</string>
     <string name="generate_graph">Generate Graph</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_blank_email">Please enter your email</string>
 
 </resources>
