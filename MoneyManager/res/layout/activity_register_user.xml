@@ -16,6 +16,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:ems="10"
+        android:hint="Username"
         android:inputType="text" />
 
     <TextView
@@ -54,6 +55,7 @@
         android:layout_alignRight="@+id/registerName"
         android:layout_below="@+id/textView3"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword" >
 
         <requestFocus />
@@ -64,7 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/registerPassword"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/registerPassword"
+        android:layout_marginTop="14dp"
         android:text="@string/confirm_password" />
 
     <EditText
@@ -75,15 +78,16 @@
         android:layout_alignRight="@+id/registerPassword"
         android:layout_below="@+id/textView4"
         android:ems="10"
+        android:hint="Repeat Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/email"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/green_button"
         android:text="@string/register" />
 
@@ -104,6 +108,7 @@
         android:layout_alignRight="@+id/confirmPassword"      
         android:layout_below="@+id/TextView01"
         android:ems="10"
+        android:hint="Email Address"
         android:inputType="textEmailAddress" />
 
 </RelativeLayout>

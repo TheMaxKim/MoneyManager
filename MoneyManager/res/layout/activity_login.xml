@@ -112,6 +112,7 @@
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:layout_below="@+id/forgotpassword"
+                         android:layout_centerHorizontal="true"
                          ads:adUnitId="ca-app-pub-2331275338105009/8151602373"
                          ads:adSize="BANNER"/>
 
