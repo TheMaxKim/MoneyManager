@@ -1,5 +1,6 @@
 package com.serialcoders.moneymanager;
 
+import com.google.android.gms.ads.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -41,6 +42,7 @@ public class Login extends Activity {
      */
     private Button buttonRegister;
     private Button forgotPassword;
+    private AdView adView;
     
     MediaPlayer mp;
     
@@ -49,6 +51,11 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_login);
+        
+        // Look up the AdView as a resource and load a request.
+        AdView adView = (AdView)this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
         
         ParseObject.registerSubclass(ParseUser.class);
         Parse.initialize(this, "f0ZnpLcS3ysYplTiCoBOGKz3jFsdcGX9y5n3GLIT", "dZ5kg5BmoWFf5YdCBrDrcjZ7QA4SU5qSg8C151f3");
