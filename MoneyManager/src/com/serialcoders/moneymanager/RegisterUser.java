@@ -3,6 +3,7 @@ package com.serialcoders.moneymanager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -46,6 +47,8 @@ public class RegisterUser extends Activity {
      */
     private String loadingMessage = "One Moment";
     
+    MediaPlayer mp;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +60,13 @@ public class RegisterUser extends Activity {
         passwordView = (EditText) findViewById(R.id.registerPassword);
         confirmPasswordView = (EditText) findViewById(R.id.confirmPassword);
         
+        mp = MediaPlayer.create(this,R.raw.button_click);
+        
         findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+            	
+            	mp.start();
+            	
             	String space = " ";
                 String joinMessage = space + getResources().getString(R.string.error_join) + space;
                 

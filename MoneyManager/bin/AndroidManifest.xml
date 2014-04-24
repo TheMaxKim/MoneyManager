@@ -32,10 +32,9 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/money"
-        android:label="@string/app_name"      
-        android:theme="@style/AppTheme" >>
-        
-        
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+>
         <activity
             android:name="com.serialcoders.moneymanager.SplashScreen"
             android:label="@string/app_name"
@@ -124,6 +123,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.serialcoders.moneymanager.UserAccountActivity" />
+        </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.GraphActivity"
+            android:label="@string/title_activity_graph" >
+        </activity>
+        <activity
+            android:name="com.serialcoders.moneymanager.GraphSelectActivity"
+            android:label="@string/title_activity_graph_select" >
         </activity>
     </application>
 

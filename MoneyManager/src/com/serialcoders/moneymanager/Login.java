@@ -3,6 +3,7 @@ package com.serialcoders.moneymanager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -40,6 +41,8 @@ public class Login extends Activity {
      */
     private Button buttonRegister;
     
+    MediaPlayer mp;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +58,13 @@ public class Login extends Activity {
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         
+        mp = MediaPlayer.create(this, R.raw.button_click);
+        
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 
+            	mp.start();
+            	
                 final ProgressDialog dlg = new ProgressDialog(Login.this);
                 dlg.setTitle("One Moment");
                 dlg.setMessage("Logging in...");
@@ -94,6 +101,9 @@ public class Login extends Activity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            	
+            	mp.start();
+            	
                 // Goto sign up screen
                 Intent in = new Intent(Login.this, RegisterUser.class);
                 startActivity(in);
