@@ -91,6 +91,8 @@
         	android:id="@+id/profilepicture"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
+        	android:scaleType = "centerInside"
+       		android:adjustViewBounds="true"
         	android:layout_below="@+id/welcomemessage"
         	android:layout_centerHorizontal="true"
         	android:src="@drawable/default_profile_pic" />
